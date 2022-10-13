@@ -11,5 +11,3 @@ def result():
     brand = request.args.get('brand', 'me')
     result = 'The brand is ' + brand
     return result
-
-application.run()

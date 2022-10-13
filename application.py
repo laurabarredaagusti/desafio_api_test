@@ -8,6 +8,8 @@ def hello_world():
 
 @application.route('/result', methods=['GET'])
 def result():
-    brand = request.args.get('brand', None)
+    brand = request.args.get('brand', 'me')
     result = 'The brand is ' + brand
     return result
+
+application.run()

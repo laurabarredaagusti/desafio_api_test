@@ -11,3 +11,9 @@ def result():
     brand = request.args.get('brand', 'me')
     result = 'The brand is ' + brand
     return result
+
+@application.route('/category', methods=['GET'])
+def result():
+    category = request.args.get('category', 'me')
+    result = 'The category is ' + category
+    return result

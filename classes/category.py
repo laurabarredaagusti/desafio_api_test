@@ -50,7 +50,7 @@ class Category:
             self.equiv_dict_new = dict(zip(self.brand_list_mod, list(self.equiv_dict.values())))
 
     def get_json(self):
-        self.equiv_dic_totalt = {'Brand': self.brand_list_mod,
-                           'Model_by_brand' : self.equiv_dict_new}
+        self.equiv_dic_total = {'Brand': self.brand_list_mod,
+                                 'Model_by_brand' : self.equiv_dict_new}
 
-        self.json = jsonify(self.equiv_dic_totalt)
+        self.json = jsonify(self.equiv_dic_total)

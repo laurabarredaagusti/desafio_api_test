@@ -1,5 +1,5 @@
 from bs4 import BeautifulSoup as bs
-# import requests
+import requests
 
 class KWh:
     url = 'https://tarifaluzhora.es/'

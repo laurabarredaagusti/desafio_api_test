@@ -2,6 +2,7 @@ from flask import Flask, request
 from flask_cors import CORS
 
 from classes.category import *
+from classes.calculate import *
 from classes.kwh import *
 from functions import *
 
@@ -28,15 +29,10 @@ def calculate():
     price = get_argument('price')
     hours_month = float(get_argument('hours_month'))
     hours_day = float(get_argument('hours_day'))
+
     if brand == None or model == None or hours_month == None or hours_day == None:
         return 'Missing argument'
     else:
         scrap = KWh()
-        price_kwh = float(scrap.price)
-        cost =  price_kwh * hours_month * hours_day
-
-        dict = {'Cost': str(cost)}
-
-        dict_json = jsonify(dict)
-
-        return dict_json
+        json = Calculate(scrap.price, hours_month, hours_day)
+        return json

@@ -1,12 +1,12 @@
 from flask import Flask, request
-# from flask_cors import CORS
+from flask_cors import CORS
 
 from classes.category import *
 from classes.kwh import *
 from functions import *
 
 application = Flask(__name__)
-# CORS(application)
+CORS(application)
 
 @application.route('/')
 def hello_world():
@@ -25,5 +25,3 @@ def category():
 def calculate():
     scrap = KWh()
     return scrap.price
-
-application.run()

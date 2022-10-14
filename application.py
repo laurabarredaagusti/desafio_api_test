@@ -23,5 +23,5 @@ def category():
 
 @application.route('/calculate', methods=['GET'])
 def calculate():
-    # scrap = KWh()
+    scrap = KWh()
     return 'this is price'

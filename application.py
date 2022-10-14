@@ -18,5 +18,3 @@ def result():
     else:
         query = Category(category)
         return query.json
-
-application.run()

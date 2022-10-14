@@ -5,7 +5,10 @@ class Calculate:
         self.price = float(price)
         self.hours_month = hours_month
         self.hours_day = hours_day
-        pass
+        
+        self.calculate()
+        self.get_dict()
+        self.get_json()
 
     def calculate(self):
         self.cost = self.price * self.hours_month * self.hours_day

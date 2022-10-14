@@ -1,5 +1,5 @@
 from flask import Flask, request
-from flask_cors import CORS
+# from flask_cors import CORS
 
 from classes.category import *
 from classes.calculate import *
@@ -7,7 +7,7 @@ from classes.kwh import *
 from functions import *
 
 application = Flask(__name__)
-CORS(application)
+# CORS(application)
 
 @application.route('/')
 def hello_world():
@@ -34,5 +34,7 @@ def calculate():
         return 'Missing argument'
     else:
         scrap = KWh()
-        json = Calculate(scrap.price, hours_month, hours_day)
-        return json
+        calculate = Calculate(scrap.price, hours_month, hours_day)
+        return calculate.json
+
+application.run()

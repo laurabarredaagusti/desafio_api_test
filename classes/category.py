@@ -40,11 +40,13 @@ class Category:
         self.brand_list = [elem[0] for elem in self.records]
         self.brand_list = list(set(self.brand_list))
         self.brand_list = [elem[1:-1] for elem in self.brand_list]
+        self.brand_list = [elem.lower() for elem in self.brand_list]
 
     def get_equivalences(self):
         self.model_list = [elem[1] for elem in self.records]
         self.model_list = list(set(self.model_list))
         self.model_list = [elem[1:-1] for elem in self.model_list]
+        self.model_list = [elem.lower() for elem in self.model_list]
         self.equiv_dict = {'Brand': self.brand_list,
                            'Model' : self.model_list}
 

@@ -23,7 +23,12 @@ def category():
 
 @application.route('/calculate', methods=['GET'])
 def calculate():
-    scrap = KWh()
-    price = scrap.price
-    result = 'This is the price: ' + price
-    return result
+    brand = get_argument('brand')
+    model = get_argument('model')
+    if brand == None or model == None:
+        return 'Missing argument'
+    else:
+        scrap = KWh()
+        price = scrap.price
+        result = 'This is the price: ' + price
+        return result

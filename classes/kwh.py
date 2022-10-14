@@ -10,7 +10,7 @@ class KWh:
     
     def create_soup(self):
         response = requests.get(self.url)
-    #     html = response.content
+        html = response.content
     #     self.soup = bs(html, "lxml")
     
     # def get_price(self):

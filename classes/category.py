@@ -39,8 +39,7 @@ class Category:
     def get_brand_list(self):
         self.brand_list = [elem[0] for elem in self.records]
         self.brand_list = list(set(self.brand_list))
-        self.brand_list_mod = [elem[1:-1] for elem in self.brand_list]
-        self.brand_list_mod = [elem.lower() for elem in self.brand_list_mod]
+        self.brand_list_mod = [elem[1:-1].lower() for elem in self.brand_list]
 
     def get_equivalences(self):
         self.equiv_dict = dict((key, []) for key in self.brand_list)

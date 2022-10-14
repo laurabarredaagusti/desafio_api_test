@@ -16,7 +16,8 @@ class Category:
         self.connect_database()
         self.create_cursor()
         self.exec_query()
-        self.get_dict()
+        self.get_brand_list()
+        self.get_equivalences()
         self.get_json()
 
     def connect_database(self):
@@ -35,12 +36,19 @@ class Category:
         self.cursor.execute(query)
         self.records = self.cursor.fetchall()
 
-    def get_dict(self):
-        list_brand = [elem[0] for elem in self.records]
-        list_model = [elem[1] for elem in self.records]
+    def get_brand_list(self):
+        self.brand_list = [elem[0] for elem in self.records]
+        self.brand_list = list(set(self.brand_list))
 
-        self.dict = {'Brand': list_brand,
-                     'Model' : list_model}
+    def get_equivalences(self):
+        self.model_list = [elem[1] for elem in self.records]
+        self.model_list = list(set(self.model_list))
+
+        self.equiv_dict = {'Brand': self.brand_list,
+                           'Model' : self.model_list}
 
     def get_json(self):
-        self.json = jsonify(self.dict)
+        self.equiv_dict = {'Brand': self.brand_list,
+                           'Model_by_brand' : self.equiv_dict}
+
+        self.json = jsonify(self.equiv_dict)

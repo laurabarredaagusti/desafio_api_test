@@ -1,8 +1,10 @@
 from flask import Flask, request
+from flask_cors import CORS
 from classes.category import *
 from functions import *
 
 application = Flask(__name__)
+CORS(application)
 
 @application.route('/')
 def hello_world():
@@ -16,3 +18,5 @@ def result():
     else:
         query = Category(category)
         return query.json
+
+application.run()

@@ -12,6 +12,7 @@ class KWh:
         response = requests.get(self.url)
         html = response.content
         soup = bs(html, "lxml")
+        price = float(self.soup.find('span', class_='main_text').text[:-2])
     
     # def get_price(self):
     #     self.price = float(self.soup.find('span', class_='main_text').text[:-2])

@@ -15,4 +15,4 @@ class KWh:
     
     # def get_price(self):
     #     self.price = float(self.soup.find('span', class_='main_text').text[:-2])
-        self.price = str(self.price)
+        # self.price = str(self.price)

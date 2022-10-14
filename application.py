@@ -21,7 +21,7 @@ def category():
         query = Category(category)
         return query.json
 
-# @application.route('/calculate', methods=['GET'])
-# def calculate():
-#     scrap = KWh()
-#     return scrap.price
+@application.route('/calculate', methods=['GET'])
+def calculate():
+    # scrap = KWh()
+    return 'this is price'

@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup as bs
 import requests
+import html
 
 class KWh:
     url = 'https://tarifaluzhora.es/'
@@ -11,7 +12,7 @@ class KWh:
     def create_soup(self):
         response = requests.get(self.url)
         html = response.content
-        # soup = bs(html, "lxml")
+        soup = bs(html, "lxml")
         # price = soup.find('span', class_='main_text').text[:-2]
     
     # def get_price(self):

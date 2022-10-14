@@ -25,10 +25,18 @@ def category():
 def calculate():
     brand = get_argument('brand')
     model = get_argument('model')
-    if brand == None or model == None:
+    price = get_argument('price')
+    hours_month = float(get_argument('hours_month'))
+    hours_day = float(get_argument('hours_day'))
+    if brand == None or model == None or hours_month == None or hours_day == None:
         return 'Missing argument'
     else:
         scrap = KWh()
-        price = scrap.price
-        result = 'This is the price: ' + price
-        return result
+        price_kwh = float(scrap.price)
+        cost =  price_kwh * hours_month * hours_day
+
+        dict = {'Cost': str(cost)}
+
+        dict_json = jsonify(dict)
+
+        return dict_json

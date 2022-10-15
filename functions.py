@@ -12,7 +12,6 @@ def read_json(path):
     with open(path, 'r') as j:
         return json.loads(j.read())
 
-
 def get_current_datetime():
     today = date.today()
     return today.strftime("%d/%m/%Y")
@@ -29,4 +28,11 @@ def check_today_price_exist():
 
 def get_id():
     return uuid.uuid1()
+
+def get_stored_brand_model(id):
+    data = read_json(store_data_path)
+    brand = data[id]['Brand']
+    model = data[id]['Model']
+    return brand, model
+
 

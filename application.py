@@ -1,5 +1,5 @@
 from flask import Flask
-from flask_cors import CORS
+# from flask_cors import CORS
 
 from classes.category import *
 from classes.calculate import *
@@ -7,7 +7,7 @@ from functions import *
 from variables import *
 
 application = Flask(__name__)
-CORS(application)
+# CORS(application)
 
 @application.route('/')
 def hello_world():
@@ -33,6 +33,8 @@ def calculate():
     if brand == None or model == None or hours_month == None or hours_day == None:
         return 'Missing argument'
     else:
-        price = check_today_price_exist()
-        calculate = Calculate(price, hours_month, hours_day)
-        return calculate.json
+        price, current_datetime = check_today_price_exist()
+        calculator = Calculate([brand, model, price, hours_month, hours_day, current_datetime])
+        return calculator.json
+
+application.run()

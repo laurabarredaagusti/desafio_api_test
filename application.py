@@ -36,3 +36,8 @@ def calculate():
         price, current_datetime = check_today_price_exist()
         calculator = Calculate([brand, model, price, hours_month, hours_day, current_datetime])
         return calculator.json
+
+@application.route('/calculate_from_id', methods=['GET'])
+def calculate_from_id():
+    id = get_argument('id')
+    return id

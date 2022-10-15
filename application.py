@@ -42,7 +42,7 @@ def calculate():
     model = get_argument('model')
     hours_day = float(get_argument('hours_day'))
 
-    if (brand == 0 or model == 0 or hours_day == 0) and hours_day == 0:
+    if (brand == 0 or model == 0 or hours_day == 0 or id == 0) and (hours_day == 0 or id == 0):
         return 'Missing argument'
     else:
         if brand == 0 and model == 0:

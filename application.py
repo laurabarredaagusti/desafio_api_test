@@ -1,10 +1,10 @@
-from flask import Flask, request
+from flask import Flask
 from flask_cors import CORS
 
 from classes.category import *
 from classes.calculate import *
-from classes.kwh import *
 from functions import *
+from variables import *
 
 application = Flask(__name__)
 CORS(application)
@@ -33,6 +33,6 @@ def calculate():
     if brand == None or model == None or hours_month == None or hours_day == None:
         return 'Missing argument'
     else:
-        scrap = KWh()
-        calculate = Calculate(scrap.price, hours_month, hours_day)
+        price = check_today_price_exist()
+        calculate = Calculate(price, hours_month, hours_day)
         return calculate.json

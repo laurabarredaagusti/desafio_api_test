@@ -1,6 +1,6 @@
 from unittest import result
 from flask import Flask
-# from flask_cors import CORS
+from flask_cors import CORS
 
 from classes.category import *
 from classes.calculate import *
@@ -9,7 +9,7 @@ from functions import *
 from variables import *
 
 application = Flask(__name__)
-# CORS(application)
+CORS(application)
 
 @application.route('/')
 def hello_world():
@@ -18,20 +18,21 @@ def hello_world():
 @application.route('/category', methods=['GET'])
 def category():
     category = get_argument('category')
-    session_id = get_id()
+    # session_id = get_id()
     if category == 0:
         return 'Missing argument'
     else:
-        query = Category(category, session_id)
+        query = Category(category)
         return query.json
 
 @application.route('/check_qr', methods=['GET'])
 def check_qr():
     id = get_argument('id')
+    session_id = get_id()
     if id == 0:
         return 'Missing argument'
     else:
-        query = Check_qr(id)
+        query = Check_qr(id, session_id)
         return query.result
 
 @application.route('/calculate', methods=['GET'])
@@ -47,4 +48,4 @@ def calculate():
         calculator = Calculate([brand, model, hours_day, price_kwh, current_datetime])
         return calculator.json
 
-application.run()
+# application.run()

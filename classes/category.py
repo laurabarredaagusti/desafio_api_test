@@ -32,7 +32,7 @@ class Category:
         self.cursor = self.db.cursor()
 
     def exec_query(self):
-        query = 'SELECT "Brand", "Model" FROM ' + self.category
+        query = '''SELECT "Brand", "Model" FROM products WHERE "Product_family" = \'''' + self.category + '''\';'''
         self.cursor.execute(query)
         self.records = self.cursor.fetchall()
 

@@ -52,4 +52,4 @@ def calculate():
         calculator = Calculate(session_id, [brand, model, hours_day, price_kwh, current_datetime])
         return calculator.json
 
-application.run()
+# application.run()

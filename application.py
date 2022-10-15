@@ -1,5 +1,6 @@
+from unittest import result
 from flask import Flask
-from flask_cors import CORS
+# from flask_cors import CORS
 
 from classes.category import *
 from classes.calculate import *
@@ -7,7 +8,7 @@ from functions import *
 from variables import *
 
 application = Flask(__name__)
-CORS(application)
+# CORS(application)
 
 @application.route('/')
 def hello_world():
@@ -40,4 +41,23 @@ def calculate():
 @application.route('/calculate_from_id', methods=['GET'])
 def calculate_from_id():
     id = get_argument('id')
-    return id
+
+    db = psycopg2.connect(host=host,
+                            port=port,
+                            user=user,
+                            password=password,
+                            database=database)
+    db.autocommit=True
+    cursor = db.cursor()
+
+    query = '''SELECT "Brand", "Model" FROM products_id WHERE "Id" = \'''' + id + '''\';'''
+    cursor.execute(query)
+    records = cursor.fetchall()
+
+    print(records)
+
+    result = records[0][0] + ' ' + records[0][1]
+
+    return result
+
+application.run()

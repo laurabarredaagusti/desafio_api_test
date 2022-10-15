@@ -1,6 +1,6 @@
 from unittest import result
 from flask import Flask
-# from flask_cors import CORS
+from flask_cors import CORS
 
 from classes.category import *
 from classes.calculate import *
@@ -9,7 +9,7 @@ from functions import *
 from variables import *
 
 application = Flask(__name__)
-# CORS(application)
+CORS(application)
 
 @application.route('/')
 def hello_world():
@@ -48,4 +48,4 @@ def calculate():
         calculator = Calculate([brand, model, hours_day, price_kwh, current_datetime])
         return calculator.json
 
-application.run()
+# application.run()

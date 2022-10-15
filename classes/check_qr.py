@@ -37,14 +37,15 @@ class Check_qr():
         self.records = self.cursor.fetchall()
 
     def check_if_available(self):
-        if len(self.records) != 0:
+        if len(self.records) > 0:
             self.brand = self.records[0][0]
             self.model = self.records[0][1]
-            self.create_object()
+            self.create_object_store()
             self.read_data_json()
             self.update_json()
+            self.add_session_id()
 
-    def create_object(self):
+    def create_object_store(self):
         self.result = {'Brand': self.brand,
                        'Model': self.model}
 
@@ -56,3 +57,6 @@ class Check_qr():
         self.contents[str(self.session_id)] = self.result
         with open(self.store_data_path, 'w') as outfile:
             json.dump(self.contents, outfile)
+
+    def add_session_id(self):
+        self.result['Session_id']= self.session_id

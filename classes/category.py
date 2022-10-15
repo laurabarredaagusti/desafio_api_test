@@ -1,5 +1,6 @@
 from flask import jsonify
 import psycopg2
+import json
 
 from variables import *
 
@@ -9,9 +10,11 @@ class Category:
     user = user
     password = password
     database = database 
+    store_data_path = store_data_path
 
-    def __init__(self, category):
+    def __init__(self, category, session_id):
         self.category = category
+        self.session_id = session_id
 
         self.connect_database()
         self.create_cursor()
@@ -19,6 +22,8 @@ class Category:
         self.get_brand_list()
         self.get_equivalences()
         self.get_json()
+        self.read_data_json()
+        self.update_json()
 
     def connect_database(self):
         self.db = psycopg2.connect(host=self.host,
@@ -50,7 +55,17 @@ class Category:
             self.equiv_dict_new = dict(zip(self.brand_list_mod, list(self.equiv_dict.values())))
 
     def get_json(self):
-        self.equiv_dic_total = {'Brand': self.brand_list_mod,
-                                 'Model_by_brand' : self.equiv_dict_new}
+        self.equiv_dic_total = {'Session_id': self.session_id,
+                                'Brand': self.brand_list_mod,
+                                'Model_by_brand' : self.equiv_dict_new}
 
         self.json = jsonify(self.equiv_dic_total)
+
+    def read_data_json(self):
+        with open(self.store_data_path, 'r') as j:
+            self.contents = json.loads(j.read())
+
+    def update_json(self):
+        self.contents[str(self.session_id)] = {}
+        with open(self.store_data_path, 'w') as outfile:
+            json.dump(self.contents, outfile)

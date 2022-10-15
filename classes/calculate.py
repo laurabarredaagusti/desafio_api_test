@@ -7,10 +7,10 @@ class Calculate:
     def __init__(self, arguments_list):
 
         self.arguments_list = arguments_list
-        self.price = float(arguments_list[2])
-        self.hours_month = float(arguments_list[3])
-        self.hours_day = float(arguments_list[4])
-        self.current_datetime = arguments_list[5]
+        
+        self.hours_day = float(arguments_list[2])
+        self.price_kwh = float(arguments_list[3])
+        self.current_datetime = arguments_list[4]
         
         self.calculate()
         self.get_dict()
@@ -20,7 +20,7 @@ class Calculate:
         self.update_json()
 
     def calculate(self):
-        self.cost = self.price * self.hours_month * self.hours_day
+        self.cost = self.price_kwh * self.hours_day
 
     def get_dict(self):
         self.dict = {'Cost': str(self.cost)}

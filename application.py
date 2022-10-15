@@ -1,6 +1,6 @@
 from unittest import result
 from flask import Flask
-# from flask_cors import CORS
+from flask_cors import CORS
 
 from classes.category import *
 from classes.calculate import *
@@ -8,7 +8,7 @@ from functions import *
 from variables import *
 
 application = Flask(__name__)
-# CORS(application)
+CORS(application)
 
 @application.route('/')
 def hello_world():
@@ -59,5 +59,3 @@ def calculate_from_id():
     result = records[0][0] + ' ' + records[0][1]
 
     return result
-
-application.run()

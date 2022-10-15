@@ -31,7 +31,7 @@ class KWh:
 
     def current_datetime(self):
         today = date.today()
-        self.current_date = today.strftime("%d/%m/%Y")
+        self.current_date = today.strftime("%d/%m/%Y %H:%M:%S")
 
     def open_json(self):
         with open(self.path, 'r') as j:

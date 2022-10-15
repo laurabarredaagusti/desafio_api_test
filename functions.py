@@ -14,7 +14,8 @@ def read_json(path):
 
 def get_current_datetime():
     today = date.today()
-    return today.strftime("%d/%m/%Y")
+    return today.strftime("%d/%m/%Y %H:%M:%S")
+    
 
 
 def check_today_price_exist():

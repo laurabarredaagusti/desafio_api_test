@@ -1,6 +1,6 @@
 from unittest import result
 from flask import Flask, jsonify
-# from flask_cors import CORS
+from flask_cors import CORS
 
 from classes.category import *
 from classes.calculate import *
@@ -12,7 +12,7 @@ from functions import *
 from variables import *
 
 application = Flask(__name__)
-# CORS(application)
+CORS(application)
 
 
 @application.route('/')
@@ -79,4 +79,4 @@ def advanced():
                 'end_value' : 300}
         return jsonify(dict)
 
-application.run()
+# application.run()

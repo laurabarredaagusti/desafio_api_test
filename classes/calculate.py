@@ -43,10 +43,11 @@ class Calculate:
         self.cursor = self.db.cursor()
 
     def exec_query(self):
-        query = '''SELECT "Consumption" FROM products WHERE "Brand" = \'''' + self.brand + '''\' AND "Model" = \'''' + self.model + '''\';'''
+        query = '''SELECT "Consumption", "Product_family" FROM products WHERE "Brand" = \'''' + self.brand + '''\' AND "Model" = \'''' + self.model + '''\';'''
         self.cursor.execute(query)
         self.records = self.cursor.fetchall()
         self.consumption = float(self.records[0][0])
+        self.product_family = self.records[0][1]
 
     def cal_cycles(self):
         n_weeks_month = 365 / 12 / 7
@@ -69,6 +70,7 @@ class Calculate:
 
     def store_data_dict(self):
         self.arguments_list.append(self.cost)
+        self.arguments_list.append(self.product_family)
         self.data_dict = {}
         for index, data in enumerate(store_data):
             self.data_dict[data] = self.arguments_list[index]

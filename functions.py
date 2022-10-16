@@ -19,7 +19,9 @@ def get_current_datetime():
 
 
 def check_today_price_exist():
+    print('punto 1')
     prices = read_json(kwh_price_path)
+    print('punto 2')
     current_datetime = get_current_datetime()
     if current_datetime not in prices:
         scrap = KWh()

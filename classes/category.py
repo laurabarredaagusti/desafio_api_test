@@ -10,14 +10,12 @@ class Category:
     user = user
     password = password
     database = database 
-    store_data_path = store_data_path
 
     def __init__(self, category, session_id):
         self.category = category
         self.session_id = session_id
 
         self.connect_database()
-        self.create_cursor()
         self.exec_query()
         self.get_brand_list()
         self.get_equivalences()
@@ -32,8 +30,6 @@ class Category:
                             password=self.password,
                             database=self.database)
         self.db.autocommit=True
-
-    def create_cursor(self):
         self.cursor = self.db.cursor()
 
     def exec_query(self):

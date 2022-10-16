@@ -9,7 +9,7 @@ class Calculate:
     user = user
     password = password
     database = database 
-    store_data_path = store_data_path
+
     def __init__(self, session_id, arguments_list):
 
         self.arguments_list = arguments_list
@@ -22,14 +22,12 @@ class Calculate:
         self.current_datetime = arguments_list[4]
         
         self.connect_database()
-        self.create_cursor()
-        self.exec_query()
-        self.cal_cycles()
-        self.get_dict()
-        self.get_json()
-        self.read_data_json()
-        self.store_data_dict()
-        self.update_json()
+        self.get_brand_model()
+        self.get_consumption_family()
+        self.get_type_consumption()
+        self.decide_calculator()
+        self.return_json()
+        self.store_data()
 
     def connect_database(self):
         self.db = psycopg2.connect(host=self.host,
@@ -38,16 +36,36 @@ class Calculate:
                             password=self.password,
                             database=self.database)
         self.db.autocommit=True
-
-    def create_cursor(self):
         self.cursor = self.db.cursor()
 
-    def exec_query(self):
-        query = '''SELECT "Consumption", "Product_family" FROM products WHERE "Brand" = \'''' + self.brand + '''\' AND "Model" = \'''' + self.model + '''\';'''
+    def exec_query(self, query):
         self.cursor.execute(query)
         self.records = self.cursor.fetchall()
+
+    def get_brand_model(self):
+        if self.brand == 0 and self.model == 0:
+            query = '''SELECT "Brand", "Model" FROM user_search WHERE "Session_id" = \'''' + self.session_id + '''\';'''
+            self.exec_query(query)
+            self.brand = self.records[0][0]
+            self.model = self.records[0][1]
+
+    def get_consumption_family(self):
+        query = '''SELECT "Consumption", "Product_family" FROM products WHERE "Brand" = \'''' + self.brand + '''\' AND "Model" = \'''' + self.model + '''\';'''
+        self.exec_query(query)
         self.consumption = float(self.records[0][0])
         self.product_family = self.records[0][1]
+
+    def get_type_consumption(self):
+        # query = '''SELECT "Consumption_type" FROM product_family WHERE "Product_family" = \'''' + self.product_family + '''\';'''
+        query = '''SELECT "Consumption_type" FROM product_family WHERE "Product_family" = 'Dishwasher';'''
+        self.exec_query(query)
+        self.consumption_type = self.records[0][0]
+
+    def decide_calculator(self):
+        if self.consumption_type == 'hour':
+            self.cal_kwh()
+        else:
+            self.cal_cycles()
 
     def cal_cycles(self):
         n_weeks_month = 365 / 12 / 7
@@ -56,27 +74,27 @@ class Calculate:
     def cal_kwh(self, n_hours=24):
         n_days_month = 365 / 12 
         self.cost = self.consumption * self.price_kwh * n_hours * n_days_month
-        print(self.cost)
 
-    def get_dict(self):
-        self.dict = {'Cost': str(self.cost)}
+    def return_json(self):
+        self.json = {'Cost': str(self.cost)}
+        self.json = jsonify(self.json)
 
-    def get_json(self):
-        self.json = jsonify(self.dict)
+    def store_data(self):        
+        query = '''UPDATE user_search 
+        SET 
+            "Brand" = \'''' + self.brand + '''\', 
+            "Model" = \'''' + self.model + '''\', 
+            "Hours_day" = \'''' + str(self.hours_day) + '''\', 
+            "Price_kwh" = \'''' + str(self.price_kwh) + '''\', 
+            "Datetime" = \'''' + str(self.current_datetime) + '''\', 
+            "Cost" = \'''' + str(self.cost) + '''\', 
+            "Product_family" = \'''' + self.product_family + '''\' 
+        WHERE
+            "Session_id" = \'''' + str(self.session_id) + '''\';'''
+        
+        
+        self.cursor.execute(query)
 
-    def read_data_json(self):
-        with open(self.store_data_path, 'r') as j:
-            self.contents = json.loads(j.read())
 
-    def store_data_dict(self):
-        self.arguments_list.append(self.cost)
-        self.arguments_list.append(self.product_family)
-        self.data_dict = {}
-        for index, data in enumerate(store_data):
-            self.data_dict[data] = self.arguments_list[index]
 
-    def update_json(self):
-        self.contents[self.session_id] = self.data_dict
-        with open(self.store_data_path, 'w') as outfile:
-            json.dump(self.contents, outfile)
 

@@ -14,28 +14,7 @@ def read_json(path):
 
 def get_current_datetime():
     today = date.today()
-    return today.strftime("%d/%m/%Y %H:%M:%S")
+    return today.strftime("%d/%m/%Y")
     
-
-
-def check_today_price_exist():
-    print('punto 1')
-    prices = read_json(kwh_price_path)
-    print('punto 2')
-    current_datetime = get_current_datetime()
-    if current_datetime not in prices:
-        scrap = KWh()
-        return scrap.price
-    else:
-        return prices[current_datetime], current_datetime
-
-def get_id():
-    return uuid.uuid1()
-
-def get_stored_brand_model(id):
-    data = read_json(store_data_path)
-    brand = data[id]['Brand']
-    model = data[id]['Model']
-    return brand, model
 
 

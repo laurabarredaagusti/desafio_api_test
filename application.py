@@ -1,6 +1,6 @@
 from unittest import result
-from flask import Flask
-from flask_cors import CORS
+from flask import Flask, jsonify
+# from flask_cors import CORS
 
 from classes.category import *
 from classes.calculate import *
@@ -9,7 +9,7 @@ from functions import *
 from variables import *
 
 application = Flask(__name__)
-CORS(application)
+# CORS(application)
 
 @application.route('/')
 def hello_world():
@@ -37,7 +37,7 @@ def check_qr():
 
 @application.route('/calculate', methods=['GET'])
 def calculate():
-    session_id = get_argument('id')
+    session_id = get_argument('session_id')
     brand = get_argument('brand')
     model = get_argument('model')
     hours_day = float(get_argument('hours_day'))
@@ -52,4 +52,19 @@ def calculate():
         calculator = Calculate(session_id, [brand, model, hours_day, price_kwh, current_datetime])
         return calculator.json
 
-# application.run()
+@application.route('/advanced', methods=['GET'])
+def advanced():
+    session_id = get_argument('session_id')
+    months = get_argument('months')
+    price = get_argument('price')
+
+    if session_id == 0 or months == 0 or price == 0:
+        return 'Missing arguments'
+    
+    else:
+        dict = {'cross_year' : 3,
+                'end_year' : 5,
+                'end_value' : 300}
+        return jsonify(dict)
+
+application.run()

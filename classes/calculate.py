@@ -17,7 +17,7 @@ class Calculate:
         self.session_id = session_id
         self.brand = arguments_list[0]
         self.model = arguments_list[1]
-        self.hours_day = float(arguments_list[2])
+        self.time = float(arguments_list[2])
         self.price_kwh = float(arguments_list[3])
         self.current_datetime = arguments_list[4]
         
@@ -52,6 +52,8 @@ class Calculate:
     def get_consumption_family(self):
         query = '''SELECT "Consumption", "Product_family" FROM products WHERE "Brand" = \'''' + self.brand + '''\' AND "Model" = \'''' + self.model + '''\';'''
         self.exec_query(query)
+        print(self.brand)
+        print(self.model)
         self.consumption = float(self.records[0][0])
         self.product_family = self.records[0][1]
 
@@ -68,11 +70,11 @@ class Calculate:
 
     def cal_cycles(self):
         n_weeks_month = 365 / 12 / 7
-        self.cost = self.consumption * self.price_kwh *  self.hours_day  * n_weeks_month
+        self.cost = self.consumption * self.price_kwh *  self.time  * n_weeks_month
 
     def cal_kwh(self, n_hours=24):
         n_days_month = 365 / 12 
-        self.cost = self.consumption * self.price_kwh * n_hours * n_days_month
+        self.cost = self.consumption * self.price_kwh * self.time * n_days_month
 
     def return_json(self):
         self.json = {'Cost': str(self.cost)}
@@ -83,7 +85,7 @@ class Calculate:
         SET 
             "Brand" = \'''' + self.brand + '''\', 
             "Model" = \'''' + self.model + '''\', 
-            "Hours_day" = \'''' + str(self.hours_day) + '''\', 
+            "Hours_day" = \'''' + str(self.time) + '''\', 
             "Price_kwh" = \'''' + str(self.price_kwh) + '''\', 
             "Datetime" = \'''' + str(self.current_datetime) + '''\', 
             "Cost" = \'''' + str(self.cost) + '''\', 

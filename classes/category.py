@@ -19,6 +19,7 @@ class Category:
         self.exec_query()
         self.get_brand_list()
         self.get_equivalences()
+        self.get_type_consumption()
         self.get_json()
 
     def connect_database(self):
@@ -47,9 +48,16 @@ class Category:
             self.equiv_dict[brand].append(model)
             self.equiv_dict_new = dict(zip(self.brand_list, list(self.equiv_dict.values())))
 
+    def get_type_consumption(self):
+        query = '''SELECT "Consumption_type" FROM product_family WHERE "Product_family" = \'''' + self.product_category + '''\';'''
+        self.cursor.execute(query)
+        self.records = self.cursor.fetchall()
+        self.consumption_type = self.records[0][0]
+
     def get_json(self):
         self.equiv_dic_total = {'Session_id': self.session_id,
                                 'Brand': self.brand_list,
-                                'Model_by_brand' : self.equiv_dict_new}
+                                'Model_by_brand' : self.equiv_dict_new,
+                                'Consumption_type' : self.consumption_type}
 
         self.json = jsonify(self.equiv_dic_total)

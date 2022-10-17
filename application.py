@@ -59,18 +59,18 @@ def calculate():
     session_id = get_argument('session_id')
     brand = get_argument('brand')
     model = get_argument('model')
-    hours_day = get_argument('hours_day')
+    time = get_argument('time')
     api_key = get_argument('api_key')
 
     if api_key == API_KEY:
-        if (brand == 0 or model == 0 or hours_day == 0 or session_id == 0) and (hours_day == 0 or session_id == 0):
+        if (brand == 0 or model == 0 or session_id == 0) and (time == 0 or session_id == 0):
             return 'Missing argument'
         else:   
             kwh = GetKWh()
             price_kwh = kwh.price
             current_datetime = kwh.current_date
             
-            calculator = Calculate(session_id, [brand, model, hours_day, price_kwh, current_datetime])
+            calculator = Calculate(session_id, [brand, model, time, price_kwh, current_datetime])
             return calculator.json
     else:
         return 'Forbidden'

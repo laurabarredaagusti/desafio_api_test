@@ -1,6 +1,6 @@
 from unittest import result
 from flask import Flask, jsonify
-from flask_cors import CORS
+# from flask_cors import CORS
 
 from classes.category import Category
 from classes.calculate import Calculate
@@ -11,7 +11,7 @@ from classes.kwh import GetKWh
 from functions import get_argument
 
 application = Flask(__name__)
-CORS(application)
+# CORS(application)
 
 
 @application.route('/')
@@ -51,6 +51,8 @@ def calculate():
     brand = get_argument('brand')
     model = get_argument('model')
     hours_day = get_argument('hours_day')
+    print(model)
+    print(brand)
 
     if (brand == 0 or model == 0 or hours_day == 0 or session_id == 0) and (hours_day == 0 or session_id == 0):
         return 'Missing argument'
@@ -78,4 +80,4 @@ def advanced():
                 'end_value' : 300}
         return jsonify(dict_for_full)
 
-# application.run()
+application.run()

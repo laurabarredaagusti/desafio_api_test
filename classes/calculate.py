@@ -57,6 +57,7 @@ class Calculate:
 
     def get_type_consumption(self):
         query = '''SELECT "Consumption_type" FROM product_family WHERE "Product_family" = \'''' + self.product_family + '''\';'''
+        query = '''SELECT "Consumption_type" FROM product_family WHERE "Product_family" = 'Dishwasher';'''
         self.exec_query(query)
         self.consumption_type = self.records[0][0]
 

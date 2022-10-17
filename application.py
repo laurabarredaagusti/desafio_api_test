@@ -13,9 +13,11 @@ from variables import API_KEY
 
 application = Flask(__name__)
 
-# cors_config = {'origins': []}
+cors_config = {'origins': ['https://grand-fenglisu-83cbac.netlify.app/']}
 
-CORS(application)
+CORS(application, resources={
+    r"/": cors_config 
+})
 
 
 @application.route('/')
@@ -98,4 +100,4 @@ def advanced():
     else:
         return 'Forbidden'
 
-application.run()
+# application.run()

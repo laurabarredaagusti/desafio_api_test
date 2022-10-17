@@ -38,19 +38,18 @@ class Category:
     def get_brand_list(self):
         self.brand_list = [elem[0] for elem in self.records]
         self.brand_list = list(set(self.brand_list))
-        self.brand_list_mod = [elem[1:-1].lower() for elem in self.brand_list]
 
     def get_equivalences(self):
         self.equiv_dict = dict((key, []) for key in self.brand_list)
         for elem in self.records:
             brand = elem[0]
             model = elem[1]
-            self.equiv_dict[brand].append(model[1:-1].lower())
-            self.equiv_dict_new = dict(zip(self.brand_list_mod, list(self.equiv_dict.values())))
+            self.equiv_dict[brand].append(model)
+            self.equiv_dict_new = dict(zip(self.brand_list, list(self.equiv_dict.values())))
 
     def get_json(self):
         self.equiv_dic_total = {'Session_id': self.session_id,
-                                'Brand': self.brand_list_mod,
+                                'Brand': self.brand_list,
                                 'Model_by_brand' : self.equiv_dict_new}
 
         self.json = jsonify(self.equiv_dic_total)

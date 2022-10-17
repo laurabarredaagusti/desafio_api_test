@@ -13,13 +13,13 @@ from variables import API_KEY
 
 application = Flask(__name__)
 
-# cors_config = {'origins': ['https://grand-fenglisu-83cbac.netlify.app/']}
+cors_config = {'origins': ['http://127.0.0.1:3000']}
 
-# CORS(application, resources={
-#     r"/": cors_config 
-# })
+CORS(application, resources={
+    r"/": cors_config 
+})
 
-CORS(application)
+# CORS(application)
 
 
 @application.route('/')

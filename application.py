@@ -12,6 +12,9 @@ from functions import get_argument
 from variables import API_KEY
 
 application = Flask(__name__)
+
+# cors_config = {'origins': []}
+
 CORS(application)
 
 
@@ -95,4 +98,4 @@ def advanced():
     else:
         return 'Forbidden'
 
-# application.run()
+application.run()

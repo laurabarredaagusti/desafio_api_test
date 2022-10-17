@@ -52,3 +52,24 @@ example: http://127.0.0.1:5000//calculate?api_key=923fc55c-57d8-4147-bf38-ef23d7
 returns: {
           Cost: 'montly cost'
           }
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Endpoint 4
+
+/advanced
+
+--> "api_key" : "my_api_key"   (personal api key)
+--> "session_id" : "user_session_id"   (given session id)
+--> "months" : "4"   (use months/year)
+--> "price" : "478"   (product price)
+
+example: http://127.0.0.1:5000//calculate?api_key=923fc55c-57d8-4147-bf38-ef23d7e707ad&session_id=d6faa03a-4e16-11ed-b8b3-4279d55230e3&months=4&price=456
+
+returns: {
+          Amortization_year: 'year where inversion is equal'
+          End_year: 'total years axis x'
+          End_value: 'total money invested'
+          }

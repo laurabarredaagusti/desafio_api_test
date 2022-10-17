@@ -4,9 +4,9 @@ from flask import Flask, jsonify
 
 from classes.category import Category
 from classes.calculate import Calculate
-from classes.check_qr import Check_qr
-from classes.session_id import Session_id
-from classes.kwh import Get_KWh
+from classes.check_qr import CheckQr
+from classes.session_id import SessionId
+from classes.kwh import GetKWh
 
 from functions import get_argument
 
@@ -23,7 +23,7 @@ def hello_world():
 def category():
 
     category = get_argument('category')
-    query = Session_id()
+    query = SessionId()
 
     if category == 0:
         return 'Missing argument'
@@ -35,12 +35,12 @@ def category():
 @application.route('/check_qr', methods=['GET'])
 def check_qr():
     product_id = get_argument('product_id')
-    query = Session_id()
+    query = SessionId()
 
     if id == 0:
         return 'Missing argument'
     else:
-        query = Check_qr(product_id, query.session_id)
+        query = CheckQr(product_id, query.session_id)
         return query.result
 
 
@@ -55,7 +55,7 @@ def calculate():
     if (brand == 0 or model == 0 or hours_day == 0 or session_id == 0) and (hours_day == 0 or session_id == 0):
         return 'Missing argument'
     else:   
-        kwh = Get_KWh()
+        kwh = GetKWh()
         price_kwh = kwh.price
         current_datetime = kwh.current_date
         
@@ -73,9 +73,9 @@ def advanced():
         return 'Missing arguments'
     
     else:
-        dict = {'amortization_year' : 3,
+        dict_for_full = {'amortization_year' : 3,
                 'end_year' : 5,
                 'end_value' : 300}
-        return jsonify(dict)
+        return jsonify(dict_for_full)
 
 application.run()

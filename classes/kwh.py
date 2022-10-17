@@ -6,9 +6,9 @@ import html
 import json
 from datetime import date
 
-from variables import *
+from variables import host, port, user, password, database, kwh_price_path
 
-class Get_KWh:
+class GetKWh:
     host = host
     port = port
     user = user
@@ -19,7 +19,6 @@ class Get_KWh:
     url = 'https://tarifaluzhora.es/'
 
     def __init__(self):
-        pass
         self.current_datetime()
         self.connect_database()
         self.exec_query()

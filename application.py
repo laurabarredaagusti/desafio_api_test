@@ -1,18 +1,17 @@
 from unittest import result
 from flask import Flask, jsonify
-from flask_cors import CORS
+# from flask_cors import CORS
 
-from classes.category import *
-from classes.calculate import *
-from classes.check_qr import *
-from classes.session_id import *
-from classes.kwh import *
+from classes.category import Category
+from classes.calculate import Calculate
+from classes.check_qr import Check_qr
+from classes.session_id import Session_id
+from classes.kwh import Get_KWh
 
-from functions import *
-from variables import *
+from functions import get_argument
 
 application = Flask(__name__)
-CORS(application)
+# CORS(application)
 
 
 @application.route('/')
@@ -35,13 +34,13 @@ def category():
 
 @application.route('/check_qr', methods=['GET'])
 def check_qr():
-    id = get_argument('id')
+    product_id = get_argument('product_id')
     query = Session_id()
 
     if id == 0:
         return 'Missing argument'
     else:
-        query = Check_qr(id, query.session_id)
+        query = Check_qr(product_id, query.session_id)
         return query.result
 
 
@@ -74,9 +73,9 @@ def advanced():
         return 'Missing arguments'
     
     else:
-        dict = {'cross_year' : 3,
+        dict = {'amortization_year' : 3,
                 'end_year' : 5,
                 'end_value' : 300}
         return jsonify(dict)
 
-# application.run()
+application.run()

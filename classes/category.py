@@ -2,7 +2,7 @@ from flask import jsonify
 import psycopg2
 import json
 
-from variables import *
+from variables import host, port, user, password, database
 
 class Category:
     host = host
@@ -12,7 +12,7 @@ class Category:
     database = database 
 
     def __init__(self, category, session_id):
-        self.category = category
+        self.product_category = category
         self.session_id = session_id
 
         self.connect_database()
@@ -33,7 +33,7 @@ class Category:
         self.cursor = self.db.cursor()
 
     def exec_query(self):
-        query = '''SELECT "Brand", "Model" FROM products WHERE "Product_family" = \'''' + self.category + '''\';'''
+        query = '''SELECT "Brand", "Model" FROM products WHERE "Product_family" = \'''' + self.product_category + '''\';'''
         self.cursor.execute(query)
         self.records = self.cursor.fetchall()
 

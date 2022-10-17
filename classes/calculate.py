@@ -1,7 +1,7 @@
 from flask import jsonify
 import json
 import psycopg2
-from variables import *
+from variables import host, port, user, password, database
 
 class Calculate:
     host = host
@@ -56,8 +56,7 @@ class Calculate:
         self.product_family = self.records[0][1]
 
     def get_type_consumption(self):
-        # query = '''SELECT "Consumption_type" FROM product_family WHERE "Product_family" = \'''' + self.product_family + '''\';'''
-        query = '''SELECT "Consumption_type" FROM product_family WHERE "Product_family" = 'Dishwasher';'''
+        query = '''SELECT "Consumption_type" FROM product_family WHERE "Product_family" = \'''' + self.product_family + '''\';'''
         self.exec_query(query)
         self.consumption_type = self.records[0][0]
 

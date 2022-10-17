@@ -1,9 +1,9 @@
 import psycopg2
 import json
 
-from variables import *
+from variables import host, port, user, password, database
 
-class Check_qr():
+class CheckQr():
     host = host
     port = port
     user = user

@@ -1,8 +1,8 @@
 import uuid
 import psycopg2
-from variables import *
+from variables import host, port, user, password, database
 
-class Session_id():
+class SessionId():
     host = host
     port = port
     user = user

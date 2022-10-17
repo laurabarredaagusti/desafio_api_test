@@ -1,9 +1,6 @@
 from flask import request
 import json
 from datetime import date
-import uuid
-from classes.kwh import *
-from variables import *
 
 def get_argument(argument):
     return request.args.get(argument, 0)

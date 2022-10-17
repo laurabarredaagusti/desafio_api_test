@@ -20,8 +20,6 @@ class Category:
         self.get_brand_list()
         self.get_equivalences()
         self.get_json()
-        self.read_data_json()
-        self.update_json()
 
     def connect_database(self):
         self.db = psycopg2.connect(host=self.host,
@@ -56,12 +54,3 @@ class Category:
                                 'Model_by_brand' : self.equiv_dict_new}
 
         self.json = jsonify(self.equiv_dic_total)
-
-    def read_data_json(self):
-        with open(self.store_data_path, 'r') as j:
-            self.contents = json.loads(j.read())
-
-    def update_json(self):
-        self.contents[str(self.session_id)] = {}
-        with open(self.store_data_path, 'w') as outfile:
-            json.dump(self.contents, outfile)

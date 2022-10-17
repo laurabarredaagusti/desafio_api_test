@@ -50,8 +50,6 @@ class Calculate:
             self.model = self.records[0][1]
 
     def get_consumption_family(self):
-        print(self.brand)
-        print(self.model)
         query = '''SELECT "Consumption", "Product_family" FROM products WHERE "Brand" = \'''' + self.brand + '''\' AND "Model" = \'''' + self.model + '''\';'''
         self.exec_query(query)
         self.consumption = float(self.records[0][0])

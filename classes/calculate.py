@@ -26,8 +26,8 @@ class Calculate:
         self.get_consumption_family()
         self.get_type_consumption()
         self.decide_calculator()
-        self.return_json()
         self.store_data()
+        self.return_json()
 
     def connect_database(self):
         self.db = psycopg2.connect(host=self.host,
@@ -74,11 +74,7 @@ class Calculate:
 
     def cal_kwh(self, n_hours=24):
         n_days_month = 365 / 12 
-        self.cost = self.consumption * self.price_kwh * self.time * n_days_month
-
-    def return_json(self):
-        self.json = {'Cost': str(self.cost)}
-        self.json = jsonify(self.json)
+        self.cost = self.consumption * self.price_kwh * self.time * n_days_month 
 
     def store_data(self):        
         query = '''UPDATE user_search 
@@ -92,9 +88,13 @@ class Calculate:
             "Product_family" = \'''' + self.product_family + '''\' 
         WHERE
             "Session_id" = \'''' + str(self.session_id) + '''\';'''
-        
+            
         
         self.cursor.execute(query)
+
+    def return_json(self):
+        self.json = {'Cost': str(round(self.cost, 2))}
+        self.json = jsonify(self.json)
 
 
 

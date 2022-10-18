@@ -47,7 +47,7 @@ Endpoint 3
 --> "model" : "ksw38940"   (given session id)
 --> "time" : "4"   (hours/day or cicles/week)
 
-example: http://127.0.0.1:5000//calculate?api_key=923fc55c-57d8-4147-bf38-ef23d7e707ad&session_id=d6faa03a-4e16-11ed-b8b3-4279d55230e3&brand=iberna&model=idih%202l952-80&hours_day=3
+example: http://127.0.0.1:5000//calculate?api_key=923fc55c-57d8-4147-bf38-ef23d7e707ad&session_id=d6faa03a-4e16-11ed-b8b3-4279d55230e3&brand=iberna&model=idih%202l952-80&time=3
 
 returns: {
           Cost: 'montly cost'

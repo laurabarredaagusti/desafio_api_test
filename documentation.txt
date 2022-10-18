@@ -25,7 +25,7 @@ Endpoint 2
 --> "api_key" : "my_api_key"   (personal api key)
 --> "product_id" : "https://eprel.ec.europa.eu/screen/product/dishwashers2019/1297060"   (product url)
 
-example: https://whispering-river-01987.herokuapp.com/category?api_key=923fc55c-57d8-4147-bf38-ef23d7e707ad&product_id=https://eprel.ec.europa.eu/screen/product/dishwashers2019/1297060
+example: https://whispering-river-01987.herokuapp.com/check_qr?api_key=923fc55c-57d8-4147-bf38-ef23d7e707ad&product_id=https://eprel.ec.europa.eu/screen/product/dishwashers2019/1297060
 
 returns: {
           Session_id: 'session id'
@@ -45,15 +45,15 @@ Endpoint 3
 --> "session_id" : "user_session_id"   (given session id)
 --> "brand1" : "bosch"   (given session id)
 --> "model1" : "ksw38940"   (given session id)
---> "time1" : "4"   (hours/day or cicles/week)
 --> "brand2" : "bosch"   (given session id)
 --> "model2" : "ksw38940"   (given session id)
---> "time2" : "4"   (hours/day or cicles/week)
+--> "time" : "4"   (hours/day or cicles/week)
 
-example: https://whispering-river-01987.herokuapp.com/calculate?api_key=923fc55c-57d8-4147-bf38-ef23d7e707ad&session_id=d6faa03a-4e16-11ed-b8b3-4279d55230e3&brand1=iberna&model1=idih%202l952-80&time1=3&brand2=iberna&model2=idih%202l952-80&time2=3
+example: https://whispering-river-01987.herokuapp.com/calculate?api_key=923fc55c-57d8-4147-bf38-ef23d7e707ad&session_id=d6faa03a-4e16-11ed-b8b3-4279d55230e3&brand1=iberna&model1=idih%202l952-80&&brand2=iberna&model2=idih%202l952-80&time=3
 
 returns: {
-          Cost: 'montly cost'
+          Cost1: 'montly cost'
+          Cost2: 'montly cost'
           }
 
 

@@ -1,5 +1,5 @@
 from flask import Flask, jsonify
-from flask_cors import CORS
+# from flask_cors import CORS
 
 from classes.category import Category
 from classes.calculate import Calculate
@@ -12,7 +12,7 @@ from functions import get_argument
 from variables import API_KEY
 
 application = Flask(__name__)
-CORS(application)
+# CORS(application)
 
 
 @application.route('/')
@@ -59,10 +59,9 @@ def calculate():
     session_id = get_argument('session_id')
     brand1 = get_argument('brand1')
     model1 = get_argument('model1')
-    time1 = get_argument('time1')
     brand2 = get_argument('brand2')
     model2 = get_argument('model2')
-    time2 = get_argument('time2')
+    time = get_argument('time')
     api_key = get_argument('api_key')
 
     if api_key == API_KEY:
@@ -73,7 +72,7 @@ def calculate():
             price_kwh = kwh.price
             current_datetime = kwh.current_date
             
-            calculator = Calculate(session_id, [brand1, model1, time1, brand2, model2, time2, price_kwh, current_datetime])
+            calculator = Calculate(session_id, [brand1, model1, brand2, model2, time, price_kwh, current_datetime])
             return calculator.json
     else:
         return 'Forbidden'

@@ -63,7 +63,7 @@ class Calculate:
         self.consumption_type = self.records[0][0]
 
     def decide_calculator(self):
-        if self.consumption_type == 'hour':
+        if self.consumption_type == 'hour' or self.consumption_type == 'permanent':
             self.cal_kwh()
         else:
             self.cal_cycles()

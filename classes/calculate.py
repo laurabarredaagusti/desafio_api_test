@@ -21,8 +21,8 @@ class Calculate:
         self.get_consumption_family()
         self.get_type_consumption()
         self.decide_calculator()
-        self.store_data()
         self.return_json()
+        self.store_data()
 
     def get_brand_model(self):
         if self.brand1 == 0 and self.model1 == 0 and self.brand2 == 0 and self.model2 == 0:
@@ -67,22 +67,11 @@ class Calculate:
             self.cost_1 = self.cal_cycles(self.consumption1, self.time)
             self.cost_2 = self.cal_cycles(self.consumption2, self.time)
 
-    # def store_data(self):        
-    #     query = '''UPDATE user_search 
-    #     SET 
-    #         "Brand1" = \'''' + self.brand1 + '''\', 
-    #         "Model1" = \'''' + self.model1 + '''\', 
-    #         "Brand2" = \'''' + self.brand2 + '''\', 
-    #         "Model2" = \'''' + self.model2 + '''\', 
-    #         "Hours_day" = \'''' + str(self.time) + '''\', 
-    #         "Price_kwh" = \'''' + str(self.price_kwh) + '''\', 
-    #         "Datetime" = \'''' + str(self.current_datetime) + '''\', 
-    #         "Cost1" = \'''' + str(self.cost_1) + '''\', 
-    #         "Cost2" = \'''' + str(self.cost_2) + '''\', 
-    #         "Product_family" = \'''' + self.product_family + '''\' 
-    #     WHERE
-    #         "Session_id" = \'''' + str(self.session_id) + '''\';'''
-    #     exec_query_no_records(query, self.cursor)
+    def return_json(self):
+        self.json = {'Cost1': str(round(self.cost_1, 2)),
+                     'Cost2': str(round(self.cost_2, 2))}
+        self.json = jsonify(self.json)
+
 
     def store_data(self):    
         self.time = str(self.time)
@@ -109,13 +98,3 @@ class Calculate:
                         "Session_id" = \'{self.session_id}\';'''
 
         exec_query_no_records(query, self.cursor)
-
-
-    def return_json(self):
-        self.json = {'Cost1': str(round(self.cost_1, 2)),
-                     'Cost2': str(round(self.cost_2, 2))}
-        self.json = jsonify(self.json)
-
-
-
-

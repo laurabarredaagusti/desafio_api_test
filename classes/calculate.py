@@ -67,44 +67,49 @@ class Calculate:
             self.cost_1 = self.cal_cycles(self.consumption1, self.time)
             self.cost_2 = self.cal_cycles(self.consumption2, self.time)
 
-    def store_data(self):        
-        query = '''UPDATE user_search 
-        SET 
-            "Brand1" = \'''' + self.brand1 + '''\', 
-            "Model1" = \'''' + self.model1 + '''\', 
-            "Brand2" = \'''' + self.brand2 + '''\', 
-            "Model2" = \'''' + self.model2 + '''\', 
-            "Hours_day" = \'''' + str(self.time) + '''\', 
-            "Price_kwh" = \'''' + str(self.price_kwh) + '''\', 
-            "Datetime" = \'''' + str(self.current_datetime) + '''\', 
-            "Cost1" = \'''' + str(self.cost_1) + '''\', 
-            "Cost2" = \'''' + str(self.cost_2) + '''\', 
-            "Product_family" = \'''' + self.product_family + '''\' 
-        WHERE
-            "Session_id" = \'''' + str(self.session_id) + '''\';'''
-        exec_query_no_records(query, self.cursor)
+    # def store_data(self):        
+    #     query = '''UPDATE user_search 
+    #     SET 
+    #         "Brand1" = \'''' + self.brand1 + '''\', 
+    #         "Model1" = \'''' + self.model1 + '''\', 
+    #         "Brand2" = \'''' + self.brand2 + '''\', 
+    #         "Model2" = \'''' + self.model2 + '''\', 
+    #         "Hours_day" = \'''' + str(self.time) + '''\', 
+    #         "Price_kwh" = \'''' + str(self.price_kwh) + '''\', 
+    #         "Datetime" = \'''' + str(self.current_datetime) + '''\', 
+    #         "Cost1" = \'''' + str(self.cost_1) + '''\', 
+    #         "Cost2" = \'''' + str(self.cost_2) + '''\', 
+    #         "Product_family" = \'''' + self.product_family + '''\' 
+    #     WHERE
+    #         "Session_id" = \'''' + str(self.session_id) + '''\';'''
+    #     exec_query_no_records(query, self.cursor)
 
     def store_data(self):    
         self.time = str(self.time)
         self.price_kwh = str(self.price_kwh) 
-        self.current_datetime = str(self.current_datetime)    
+        self.current_datetime = str(self.current_datetime) 
+        self.cost_1 = str(self.cost_1)    
+        self.cost_2 = str(self.cost_2)    
+        self.product_family = str(self.product_family)    
+        self.session_id = str(self.session_id)    
+
         query = f'''UPDATE user_search 
-        SET 
-            "Brand1" = \'{self.brand1}\', 
-            "Model1" = \'{self.model1}\', 
-            "Brand2" = \'{self.brand2}\', 
-            "Model2" = \'{self.model2}\', 
-            "Hours_day" = \'{self.time}\', 
-            "Price_kwh" = \'{self.price_kwh}\', 
-            "Datetime" = \'{self.current_datetime}\', 
-            "Cost1" = \'''' + str(self.cost_1) + '''\', 
-            "Cost2" = \'''' + str(self.cost_2) + '''\', 
-            "Product_family" = \'''' + self.product_family + '''\' 
-        WHERE
-            "Session_id" = \'''' + str(self.session_id) + '''\';'''
+                    SET 
+                        "Brand1" = \'{self.brand1}\', 
+                        "Model1" = \'{self.model1}\', 
+                        "Brand2" = \'{self.brand2}\', 
+                        "Model2" = \'{self.model2}\', 
+                        "Hours_day" = \'{self.time}\', 
+                        "Price_kwh" = \'{self.price_kwh}\', 
+                        "Datetime" = \'{self.current_datetime}\', 
+                        "Cost1" = \'{self.cost_1}\', 
+                        "Cost2" = \'{self.cost_2}\', 
+                        "Product_family" = \'{self.product_family}\' 
+                    WHERE
+                        "Session_id" = \'{self.session_id}\';'''
+
         exec_query_no_records(query, self.cursor)
 
-    f'A function without return statement returns {saludo}'
 
     def return_json(self):
         self.json = {'Cost1': str(round(self.cost_1, 2)),

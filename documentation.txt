@@ -52,7 +52,7 @@ Endpoint 3
 --> "model2" : "ksw38940"   (given session id)
 --> "time" : "4"   (hours/day or cicles/week)
 
-example: https://whispering-river-01987.herokuapp.com/calculate?api_key=923fc55c-57d8-4147-bf38-ef23d7e707ad&session_id=d6faa03a-4e16-11ed-b8b3-4279d55230e3&brand1=iberna&model1=idih%202l952-80&&brand2=iberna&model2=idih%202l952-80&time=3
+example: https://whispering-river-01987.herokuapp.com/calculate?api_key=923fc55c-57d8-4147-bf38-ef23d7e707ad&session_id=d6faa03a-4e16-11ed-b8b3-4279d55230e3&brand1=iberna&model1=idih%202l952-80&brand2=siemens&model2=sn23hw00me&time=3
 
 returns: {
           Cost1: 'montly cost'
@@ -70,12 +70,15 @@ Endpoint 4
 --> "api_key" : "my_api_key"   (personal api key)
 --> "session_id" : "user_session_id"   (given session id)
 --> "months" : "4"   (use months/year)
---> "price" : "478"   (product price)
+--> "price1" : "478"   (product price)
+--> "price2" : "478"   (product price)
 
-example: https://whispering-river-01987.herokuapp.com/calculate?api_key=923fc55c-57d8-4147-bf38-ef23d7e707ad&session_id=d6faa03a-4e16-11ed-b8b3-4279d55230e3&months=4&price=456
+example: http://127.0.0.1:5000/advanced?api_key=923fc55c-57d8-4147-bf38-ef23d7e707ad&session_id=80177c2a-4f33-11ed-b7fb-1ebee0506840&months=3&price1=455&price2=460
 
 returns: {
-          Amortization_year: 'year where inversion is equal'
-          End_year: 'total years axis x'
-          End_value: 'total money invested'
+          CrossingYear: 'year where inversion is equal'
+          Crossing_point : 'value of crossing point'
+          Total_years: 'total years axis x'
+          End_value1: 'total money invested'
+          End_value2: 'total money invested'
           }

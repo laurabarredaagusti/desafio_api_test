@@ -1,6 +1,7 @@
-from flask import Flask, jsonify
+from flask import Flask
 from flask_cors import CORS
 
+from classes.advanced_calculate import AdvancedCalculate
 from classes.category import Category
 from classes.calculate import Calculate
 from classes.check_qr import CheckQr
@@ -66,7 +67,7 @@ def calculate():
     api_key = get_argument('api_key')
 
     if api_key == API_KEY:
-        if (brand1 == 0 or model1 == 0 or brand2 == 0 or model2 == 0  or session_id == 0) and (session_id == 0):
+        if (brand1 == 0 or model1 == 0 or brand2 == 0 or model2 == 0  or session_id == 0 or time == 0) and (session_id == 0 or time == 0):
             return 'Missing argument'
         else:   
             kwh = GetKWh()
@@ -81,20 +82,18 @@ def calculate():
 
 @application.route('/advanced', methods=['GET'])
 def advanced():
-    session_id = get_argument('session_id')
+    sessionId = get_argument('session_id')
     months = get_argument('months')
-    price = get_argument('price')
+    price1 = get_argument('price1')
+    price2 = get_argument('price2')
     api_key = get_argument('api_key')
 
     if api_key == API_KEY:
-        if session_id == 0 or months == 0 or price == 0:
+        if sessionId == 0 or months == 0 or price1 == 0 or price2 == 0:
             return 'Missing arguments'
-        
         else:
-            dict_for_full = {'amortization_year' : 3,
-                    'end_year' : 5,
-                    'end_value' : 300}
-            return jsonify(dict_for_full)
+            query = AdvancedCalculate(months, price1, price2, sessionId)
+            return query.result_obj
     else:
         return 'Forbidden'
 

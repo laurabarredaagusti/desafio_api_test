@@ -62,13 +62,13 @@ class Calculate:
         return consumption * self.price_kwh *  time  * n_weeks_month
 
 
-    def cal_kwh(self, consumption, time=24):
+    def cal_kwh(self, consumption, time):
         n_days_month = 365 / 12 
         return consumption * self.price_kwh * time * n_days_month 
 
 
     def decide_calculator(self):
-        if self.consumption_type == 'hour' or self.consumption_type == 'permanent':
+        if self.consumption_type == 'hour' or self.consumption_type == 'permanent' or self.consumption_type == 'hours_week':
             self.cost_1 = self.cal_kwh(self.consumption1, self.time)
             self.cost_2 = self.cal_kwh(self.consumption2, self.time)
         else:

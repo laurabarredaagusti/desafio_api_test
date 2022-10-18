@@ -1,17 +1,26 @@
 from flask import request
-import json
+import psycopg2
 from datetime import date
+from variables import *
 
 def get_argument(argument):
     return request.args.get(argument, 0)
 
-def read_json(path):
-    with open(path, 'r') as j:
-        return json.loads(j.read())
+def connect_database():
+        db = psycopg2.connect(host=host,
+                            port=port,
+                            user=user,
+                            password=password,
+                            database=database)
+        db.autocommit=True
+        return db.cursor()
 
-def get_current_datetime():
-    today = date.today()
-    return today.strftime("%d/%m/%Y")
+def exec_query_records(query, cursor):
+    cursor.execute(query)
+    return cursor.fetchall()
+
+def exec_query_no_records(query, cursor):
+    cursor.execute(query)
     
 
 

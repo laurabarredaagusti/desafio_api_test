@@ -1,14 +1,7 @@
 from flask import jsonify
-import json
-import psycopg2
-from variables import host, port, user, password, database
+from functions import *
 
 class Calculate:
-    host = host
-    port = port
-    user = user
-    password = password
-    database = database 
 
     def __init__(self, session_id, arguments_list):
 
@@ -23,7 +16,7 @@ class Calculate:
         self.price_kwh = float(arguments_list[5])
         self.current_datetime = arguments_list[6]
         
-        self.connect_database()
+        self.cursor = connect_database()
         self.get_brand_model()
         self.get_consumption_family()
         self.get_type_consumption()
@@ -31,28 +24,12 @@ class Calculate:
         self.store_data()
         self.return_json()
 
-    def connect_database(self):
-        self.db = psycopg2.connect(host=self.host,
-                            port=self.port,
-                            user=self.user,
-                            password=self.password,
-                            database=self.database)
-        self.db.autocommit=True
-        self.cursor = self.db.cursor()
-
-    def exec_query_records(self, query):
-        self.cursor.execute(query)
-        self.records = self.cursor.fetchall()
-
-    def exec_query_no_records(self, query):
-        self.cursor.execute(query)
-
     def get_brand_model(self):
         if self.brand1 == 0 and self.model1 == 0 and self.brand2 == 0 and self.model2 == 0:
             query = '''SELECT "Brand1", "Model1", "Brand2", "Model2" 
                        FROM user_search 
                        WHERE "Session_id" = \'''' + self.session_id + '''\';'''
-            self.exec_query_records(query)
+            self.records = exec_query_records(query, self.cursor)
             self.brand1 = self.records[0][0]
             self.model1 = self.records[0][1]
             self.brand2 = self.records[0][2]
@@ -62,7 +39,7 @@ class Calculate:
         query = '''SELECT "Consumption", "Product_family" FROM products 
                    WHERE ("Brand" = \'''' + self.brand1 + '''\' AND "Model" = \'''' + self.model1 + '''\')
                    OR ("Brand" = \'''' + self.brand2 + '''\' AND "Model" = \'''' + self.model2 + '''\');'''
-        self.exec_query_records(query)
+        self.records = exec_query_records(query, self.cursor)
         self.consumption1 = float(self.records[0][0])
         self.product_family = self.records[0][1]
         self.consumption2 = float(self.records[1][0])
@@ -71,7 +48,7 @@ class Calculate:
         query = '''SELECT "Consumption_type" 
                    FROM product_family 
                    WHERE "Product_family" = \'''' + self.product_family + '''\';'''
-        self.exec_query_records(query)
+        self.records = exec_query_records(query, self.cursor)
         self.consumption_type = self.records[0][0]
 
     def cal_cycles(self, consumption, time):
@@ -105,8 +82,29 @@ class Calculate:
             "Product_family" = \'''' + self.product_family + '''\' 
         WHERE
             "Session_id" = \'''' + str(self.session_id) + '''\';'''
-             
-        self.exec_query_no_records(query)
+        exec_query_no_records(query, self.cursor)
+
+    def store_data(self):    
+        self.time = str(self.time)
+        self.price_kwh = str(self.price_kwh) 
+        self.current_datetime = str(self.current_datetime)    
+        query = f'''UPDATE user_search 
+        SET 
+            "Brand1" = \'{self.brand1}\', 
+            "Model1" = \'{self.model1}\', 
+            "Brand2" = \'{self.brand2}\', 
+            "Model2" = \'{self.model2}\', 
+            "Hours_day" = \'{self.time}\', 
+            "Price_kwh" = \'{self.price_kwh}\', 
+            "Datetime" = \'{self.current_datetime}\', 
+            "Cost1" = \'''' + str(self.cost_1) + '''\', 
+            "Cost2" = \'''' + str(self.cost_2) + '''\', 
+            "Product_family" = \'''' + self.product_family + '''\' 
+        WHERE
+            "Session_id" = \'''' + str(self.session_id) + '''\';'''
+        exec_query_no_records(query, self.cursor)
+
+    f'A function without return statement returns {saludo}'
 
     def return_json(self):
         self.json = {'Cost1': str(round(self.cost_1, 2)),

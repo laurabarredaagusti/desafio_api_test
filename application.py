@@ -1,5 +1,5 @@
 from flask import Flask, jsonify
-# from flask_cors import CORS
+from flask_cors import CORS
 
 from classes.category import Category
 from classes.calculate import Calculate
@@ -12,7 +12,7 @@ from functions import get_argument
 from variables import API_KEY
 
 application = Flask(__name__)
-# CORS(application)
+CORS(application)
 
 
 @application.route('/')
@@ -96,6 +96,7 @@ def advanced():
             return jsonify(dict_for_full)
     else:
         return 'Forbidden'
+
 
 if __name__ == '__main__':
     application.run(threaded=True, port=5000)

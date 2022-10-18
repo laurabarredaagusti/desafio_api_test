@@ -5,7 +5,7 @@ Endpoint 1
 --> "api_key" : "my_api_key"   (personal api key)
 --> "category" : "diswasher"   (product families)
 
-example: http://127.0.0.1:5000/category?api_key=923fc55c-57d8-4147-bf38-ef23d7e707ad&category=dishwasher 
+example: https://whispering-river-01987.herokuapp.com//category?api_key=923fc55c-57d8-4147-bf38-ef23d7e707ad&category=dishwasher 
 
 returns: {
           Session_id: 'session id'
@@ -25,7 +25,7 @@ Endpoint 2
 --> "api_key" : "my_api_key"   (personal api key)
 --> "product_id" : "https://eprel.ec.europa.eu/screen/product/dishwashers2019/1297060"   (product url)
 
-example: http://127.0.0.1:5000/category?api_key=923fc55c-57d8-4147-bf38-ef23d7e707ad&product_id=https://eprel.ec.europa.eu/screen/product/dishwashers2019/1297060
+example: https://whispering-river-01987.herokuapp.com/category?api_key=923fc55c-57d8-4147-bf38-ef23d7e707ad&product_id=https://eprel.ec.europa.eu/screen/product/dishwashers2019/1297060
 
 returns: {
           Session_id: 'session id'
@@ -47,7 +47,7 @@ Endpoint 3
 --> "model" : "ksw38940"   (given session id)
 --> "time" : "4"   (hours/day or cicles/week)
 
-example: http://127.0.0.1:5000//calculate?api_key=923fc55c-57d8-4147-bf38-ef23d7e707ad&session_id=d6faa03a-4e16-11ed-b8b3-4279d55230e3&brand=iberna&model=idih%202l952-80&time=3
+example: https://whispering-river-01987.herokuapp.com/calculate?api_key=923fc55c-57d8-4147-bf38-ef23d7e707ad&session_id=d6faa03a-4e16-11ed-b8b3-4279d55230e3&brand=iberna&model=idih%202l952-80&time=3
 
 returns: {
           Cost: 'montly cost'
@@ -66,7 +66,7 @@ Endpoint 4
 --> "months" : "4"   (use months/year)
 --> "price" : "478"   (product price)
 
-example: http://127.0.0.1:5000//calculate?api_key=923fc55c-57d8-4147-bf38-ef23d7e707ad&session_id=d6faa03a-4e16-11ed-b8b3-4279d55230e3&months=4&price=456
+example: https://whispering-river-01987.herokuapp.com/calculate?api_key=923fc55c-57d8-4147-bf38-ef23d7e707ad&session_id=d6faa03a-4e16-11ed-b8b3-4279d55230e3&months=4&price=456
 
 returns: {
           Amortization_year: 'year where inversion is equal'

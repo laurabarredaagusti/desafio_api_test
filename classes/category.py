@@ -1,6 +1,6 @@
 from flask import jsonify
-import psycopg2
-import json
+from functions import *
+from queries.queries import *
 
 from variables import host, port, user, password, database
 
@@ -10,31 +10,23 @@ class Category:
     user = user
     password = password
     database = database 
+    brand_model_product = brand_model_product
+    consum_type_prodfamily = consum_type_prodfamily
 
     def __init__(self, category, session_id):
         self.product_category = category
         self.session_id = session_id
 
-        self.connect_database()
-        self.exec_query()
+        self.cursor = connect_database()
+        self.get_brand_model()
         self.get_brand_list()
         self.get_equivalences()
         self.get_type_consumption()
         self.get_json()
 
-    def connect_database(self):
-        self.db = psycopg2.connect(host=self.host,
-                            port=self.port,
-                            user=self.user,
-                            password=self.password,
-                            database=self.database)
-        self.db.autocommit=True
-        self.cursor = self.db.cursor()
-
-    def exec_query(self):
-        query = '''SELECT "Brand", "Model" FROM products WHERE "Product_family" = \'''' + self.product_category + '''\';'''
-        self.cursor.execute(query)
-        self.records = self.cursor.fetchall()
+    def get_brand_model(self):
+        self.brand_model_productvar = [self.product_category]
+        self.records = exec_query_records(self.brand_model_product, self.brand_model_productvar, self.cursor)
 
     def get_brand_list(self):
         self.brand_list = [elem[0] for elem in self.records]
@@ -49,9 +41,8 @@ class Category:
             self.equiv_dict_new = dict(zip(self.brand_list, list(self.equiv_dict.values())))
 
     def get_type_consumption(self):
-        query = '''SELECT "Consumption_type" FROM product_family WHERE "Product_family" = \'''' + self.product_category + '''\';'''
-        self.cursor.execute(query)
-        self.records = self.cursor.fetchall()
+        self.consum_type_prodfamilyvar = [self.product_category]
+        self.records = exec_query_records(self.consum_type_prodfamily, self.consum_type_prodfamilyvar, self.cursor)
         self.consumption_type = self.records[0][0]
 
     def get_json(self):

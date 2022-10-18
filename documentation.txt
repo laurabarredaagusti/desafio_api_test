@@ -23,14 +23,17 @@ Endpoint 2
 /check_qr
 
 --> "api_key" : "my_api_key"   (personal api key)
---> "product_id" : "https://eprel.ec.europa.eu/screen/product/dishwashers2019/1297060"   (product url)
+--> "productId1" : "1297060"   (product id)
+--> "productId2" : "1297060"   (product id)
 
-example: https://whispering-river-01987.herokuapp.com/check_qr?api_key=923fc55c-57d8-4147-bf38-ef23d7e707ad&product_id=https://eprel.ec.europa.eu/screen/product/dishwashers2019/1297060
+example: https://whispering-river-01987.herokuapp.com/check_qr?api_key=923fc55c-57d8-4147-bf38-ef23d7e707ad&productId1=1297056&productId2=1297060
 
 returns: {
           Session_id: 'session id'
-          Brand: 'product brand'
-          Model: 'product model'
+          Brand1: 'product brand'
+          Model1: 'product model'
+          Brand2: 'product brand'
+          Model2: 'product model'
           }
 
 

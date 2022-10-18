@@ -39,15 +39,16 @@ def category():
 
 @application.route('/check_qr', methods=['GET'])
 def check_qr():
-    product_id = get_argument('product_id')
+    productId1 = get_argument('productId1')
+    productId2 = get_argument('productId2')
     api_key = get_argument('api_key')
     query = SessionId()
 
     if api_key == API_KEY:
-        if product_id == 0:
+        if productId1 == 0 or productId2 == 0:
             return 'Missing argument'
         else:
-            query = CheckQr(product_id, query.session_id)
+            query = CheckQr(productId1, productId2, query.session_id)
             return query.result
     else:
         return 'Forbidden'

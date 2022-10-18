@@ -1,12 +1,10 @@
-
-import psycopg2
 from bs4 import BeautifulSoup as bs
 import requests
-import html
-import json
 from datetime import date
+from functions import *
+from queries.queries import *
 
-from variables import host, port, user, password, database, kwh_price_path
+from variables import host, port, user, password, database
 
 class GetKWh:
     host = host
@@ -14,13 +12,14 @@ class GetKWh:
     user = user
     password = password
     database = database 
-    path = kwh_price_path
+    price_kwh_date = price_kwh_date
+    insert_date_price_kwh = insert_date_price_kwh
 
     url = 'https://tarifaluzhora.es/'
 
     def __init__(self):
         self.current_datetime()
-        self.connect_database()
+        self.cursor = connect_database()
         self.exec_query()
         self.scrap()
         self.store_data()
@@ -29,19 +28,9 @@ class GetKWh:
         today = date.today()
         self.current_date = today.strftime("%d/%m/%Y")
 
-    def connect_database(self):
-        self.db = psycopg2.connect(host=self.host,
-                            port=self.port,
-                            user=self.user,
-                            password=self.password,
-                            database=self.database)
-        self.db.autocommit=True
-        self.cursor = self.db.cursor()
-
     def exec_query(self):
-        query = '''SELECT "Price" FROM price_kwh WHERE "Date" = \'''' + str(self.current_date) + '''\';'''
-        self.cursor.execute(query)
-        self.records = self.cursor.fetchall()
+        self.price_kwh_date_var = [str(self.current_date)]
+        self.records = exec_query_records(self.price_kwh_date, self.price_kwh_date_var, self.cursor)
     
     def scrap(self):
         if len(self.records) == 0:
@@ -59,5 +48,5 @@ class GetKWh:
         self.price = self.soup.find('span', class_='main_text').text[:-2]
 
     def store_data(self):
-        query = '''INSERT INTO price_kwh ("Date", "Price") VALUES (\'''' + self.current_date + '''\', \'''' + self.price + '''\');'''
-        self.cursor.execute(query)
+        self.insert_date_price_kwh_var = (self.current_date, self.price)
+        exec_query_no_records(self.insert_date_price_kwh, self.insert_date_price_kwh_var, self.cursor)

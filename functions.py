@@ -1,6 +1,5 @@
 from flask import request
 import psycopg2
-from datetime import date
 from variables import *
 
 def get_argument(argument):
@@ -15,12 +14,12 @@ def connect_database():
         db.autocommit=True
         return db.cursor()
 
-def exec_query_records(query, cursor):
-    cursor.execute(query)
+def exec_query_records(query, variables, cursor):
+    cursor.execute(query, variables)
     return cursor.fetchall()
 
-def exec_query_no_records(query, cursor):
-    cursor.execute(query)
+def exec_query_no_records(query, variables, cursor):
+    cursor.execute(query, variables)
     
 
 

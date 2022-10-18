@@ -44,7 +44,7 @@ def check_qr():
     query = SessionId()
 
     if api_key == API_KEY:
-        if id == 0:
+        if product_id == 0:
             return 'Missing argument'
         else:
             query = CheckQr(product_id, query.session_id)
@@ -57,20 +57,23 @@ def check_qr():
 def calculate():
 
     session_id = get_argument('session_id')
-    brand = get_argument('brand')
-    model = get_argument('model')
-    time = get_argument('time')
+    brand1 = get_argument('brand1')
+    model1 = get_argument('model1')
+    time1 = get_argument('time1')
+    brand2 = get_argument('brand2')
+    model2 = get_argument('model2')
+    time2 = get_argument('time2')
     api_key = get_argument('api_key')
 
     if api_key == API_KEY:
-        if (brand == 0 or model == 0 or session_id == 0) and (time == 0 or session_id == 0):
+        if (brand1 == 0 or model1 == 0 or brand2 == 0 or model2 == 0  or session_id == 0) and (session_id == 0):
             return 'Missing argument'
         else:   
             kwh = GetKWh()
             price_kwh = kwh.price
             current_datetime = kwh.current_date
             
-            calculator = Calculate(session_id, [brand, model, time, price_kwh, current_datetime])
+            calculator = Calculate(session_id, [brand1, model1, time1, brand2, model2, time2, price_kwh, current_datetime])
             return calculator.json
     else:
         return 'Forbidden'

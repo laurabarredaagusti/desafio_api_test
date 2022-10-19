@@ -5,6 +5,7 @@ class AdvancedCalculate():
 
     cost_usersearch = cost_usersearch
     update_usersearch_advanced = update_usersearch_advanced
+    brands_models_usersearch = brands_models_usersearch
 
     def __init__(self, months, price1, price2, sessionId):
         self.months = int(months)
@@ -15,6 +16,7 @@ class AdvancedCalculate():
         self.cursor = connect_database()
         self.get_cost()
         self.calculate_am()
+        self.get_brand_model()
         self.get_object()
         self.store_data()
 
@@ -55,7 +57,16 @@ class AdvancedCalculate():
         self.init_point()
         self.crossing_year()
         self.crossing_point()
+        self.end_year()
         self.end_point()
+
+    def get_brand_model(self):
+        self.brands_models_usersearch_var = [self.sessionId]
+        self.records = exec_query_records(self.brands_models_usersearch, self.brands_models_usersearch_var, self.cursor)
+        self.brand1 = self.records[0][0].title()
+        self.model1 = self.records[0][1].upper()
+        self.brand2 = self.records[0][2].title()
+        self.model2 = self.records[0][3].upper()
 
     def get_object(self):
         self.result_obj = {'CrossingYear': self.crossingYear,
@@ -63,10 +74,10 @@ class AdvancedCalculate():
                            'Total_years': self.totalYear,
                            'EndValue1': self.endValue1,
                            'EndValue2': self.endValue2,
-                           'brand1': 'brand1',
-                           'brand2': 'brand2',
-                           'model1': 'model1',
-                           'model2': 'model2'}
+                           'brand1': self.brand1,
+                           'brand2': self.brand2,
+                           'model1': self.model1,
+                           'model2': self.model2}
 
     def store_data(self):
         self.update_usersearch_advanced_var = [self.crossingYear, self.crossingCost, self.sessionId]

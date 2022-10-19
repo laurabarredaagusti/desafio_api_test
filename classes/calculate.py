@@ -88,10 +88,10 @@ class Calculate:
     def return_json(self):
         self.json = {'session_id': self.session_id,
                      'label1': self.label1,
-                     'consumption1': self.consumption1,
+                     'consumption1': str(round(self.consumption1)),
                      'Cost1': str(round(self.cost_1, 2)),
                      'label2': self.label2,
-                     'consumption2': self.consumption2,
+                     'consumption2': str(round(self.consumption2)),
                      'Cost2': str(round(self.cost_2, 2))}
         self.json = jsonify(self.json)
 

@@ -53,7 +53,7 @@ class AdvancedCalculate():
         self.end_point()
 
     def get_object(self):
-        self.result_obj = {'CrossingYear': self.crossingYear,
+        self.result_obj = {'CrossingYear': self.crossingCost,
                            'CrossingPoint': self.crossingPoint,
                            'Total_years': self.totalYear,
                            'EndValue1': self.endValue1,

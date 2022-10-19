@@ -70,6 +70,10 @@ def calculate():
     if api_key == API_KEY:
         if (brand1 == 0 or model1 == 0 or brand2 == 0 or model2 == 0  or session_id == 0 or time == 0) and (session_id == 0 or time == 0):
             return 'Missing argument'
+
+        elif brand1 == brand2 and model1 == model2:
+            return 'Same product'
+
         else:   
             kwh = GetKWh()
             price_kwh = kwh.price

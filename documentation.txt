@@ -8,7 +8,6 @@ Endpoint 1
 example: https://whispering-river-01987.herokuapp.com//category?api_key=923fc55c-57d8-4147-bf38-ef23d7e707ad&category=dishwasher 
 
 returns: {
-          Session_id: 'session id'
           Brand: 'brands list'
           Model_by_brand: 'json with brands and models'
           Consumption_type: "cycle" or "hour" or "permanent"
@@ -45,7 +44,7 @@ Endpoint 3
 /calculate
 
 --> "api_key" : "my_api_key"   (personal api key)
---> "session_id" : "user_session_id"   (given session id)
+--> "session_id" : "user_session_id"   (given session id or 'undefined')
 --> "brand1" : "bosch"   (given session id)
 --> "model1" : "ksw38940"   (given session id)
 --> "brand2" : "bosch"   (given session id)
@@ -55,7 +54,12 @@ Endpoint 3
 example: https://whispering-river-01987.herokuapp.com/calculate?api_key=923fc55c-57d8-4147-bf38-ef23d7e707ad&session_id=d6faa03a-4e16-11ed-b8b3-4279d55230e3&brand1=iberna&model1=idih%202l952-80&brand2=siemens&model2=sn23hw00me&time=3
 
 returns: {
+          sessionId: 'session_id'
+          label1: 'label'
+          consumption1: 'consumption'
           Cost1: 'montly cost'
+          label2: 'label'
+          consumption2: 'consumption'
           Cost2: 'montly cost'
           }
 

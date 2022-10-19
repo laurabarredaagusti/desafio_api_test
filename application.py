@@ -26,13 +26,12 @@ def category():
 
     category = get_argument('category')
     api_key = get_argument('api_key')
-    query = SessionId()
 
     if api_key == API_KEY:
         if category == 0:
             return 'Missing argument'
         else:
-            query = Category(category, query.session_id)
+            query = Category(category)
             return query.json
     else:
         return 'Forbidden'
@@ -67,11 +66,15 @@ def calculate():
     api_key = get_argument('api_key')
 
     if api_key == API_KEY:
-        if (brand1 == 0 or model1 == 0 or brand2 == 0 or model2 == 0  or session_id == 0 or time == 0) and (session_id == 0 or time == 0):
+        if (brand1 == 0 or model1 == 0 or brand2 == 0 or model2 == 0  or time == 0) and (session_id == 0 or time == 0):
             return 'Missing argument'
 
         elif brand1 == brand2 and model1 == model2:
             return 'Same product'
+
+        elif session_id == 'undefined':
+            query = SessionId()
+            session_id = query.session_id
 
         else:   
             kwh = GetKWh()

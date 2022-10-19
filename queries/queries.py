@@ -1,4 +1,4 @@
-cons_prod_fam_products = '''SELECT "Consumption", "Product_family" FROM products WHERE ("Brand" = %s AND "Model" = %s) OR ("Brand" = %s AND "Model" = %s);'''
+cons_prod_fam_products = '''SELECT "Consumption", "Product_family", "Label" FROM products WHERE ("Brand" = %s AND "Model" = %s) OR ("Brand" = %s AND "Model" = %s);'''
 
 brand_model_product = '''SELECT "Brand", "Model" FROM products WHERE "Product_family" = %s;'''
 

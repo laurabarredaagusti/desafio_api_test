@@ -10,6 +10,7 @@ class Calculate:
     brands_models_usersearch = brands_models_usersearch
     consum_type_prodfamily = consum_type_prodfamily
     update_calculate = update_calculate
+    labelDict = labelDict
 
     def __init__(self, session_id, arguments_list):
 
@@ -48,7 +49,9 @@ class Calculate:
         self.records = exec_query_records(self.cons_prod_fam_products, self.cons_prod_fam_products_var, self.cursor)
         self.consumption1 = float(self.records[0][0])
         self.product_family = self.records[0][1]
+        self.label1 = self.records[0][2]
         self.consumption2 = float(self.records[1][0])
+        self.label2 = self.records[1][2]
         
 
     def get_type_consumption(self):
@@ -75,9 +78,19 @@ class Calculate:
             self.cost_1 = self.cal_cycles(self.consumption1, self.time)
             self.cost_2 = self.cal_cycles(self.consumption2, self.time)
 
+    
+    def get_label(self):
+        self.label1 = self.labelDict[self.label1]
+        self.label2 = self.labelDict[self.label2]
+
 
     def return_json(self):
-        self.json = {'Cost1': str(round(self.cost_1, 2)),
+        self.json = {'session_id': self.session_id,
+                     'label1': self.label1,
+                     'consumption1': self.consumption1,
+                     'Cost1': str(round(self.cost_1, 2)),
+                     'label2': self.label2,
+                     'consumption2': self.consumption2,
                      'Cost2': str(round(self.cost_2, 2))}
         self.json = jsonify(self.json)
 

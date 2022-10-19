@@ -13,9 +13,8 @@ class Category:
     brand_model_product = brand_model_product
     consum_type_prodfamily = consum_type_prodfamily
 
-    def __init__(self, category, session_id):
+    def __init__(self, category):
         self.product_category = category
-        self.session_id = session_id
 
         self.cursor = connect_database()
         self.get_brand_model()
@@ -46,8 +45,7 @@ class Category:
         self.consumption_type = self.records[0][0]
 
     def get_json(self):
-        self.equiv_dic_total = {'Session_id': self.session_id,
-                                'Brand': self.brand_list,
+        self.equiv_dic_total = {'Brand': self.brand_list,
                                 'Model_by_brand' : self.equiv_dict_new,
                                 'Consumption_type' : self.consumption_type}
 

@@ -75,15 +75,12 @@ def calculate():
         elif session_id == 'undefined':
             query = SessionId()
             session_id = query.session_id
-            return str(session_id)
-
-        else:   
-            kwh = GetKWh()
-            price_kwh = kwh.price
-            current_datetime = kwh.current_date
             
-            calculator = Calculate(session_id, [brand1, model1, brand2, model2, time, price_kwh, current_datetime])
-            return calculator.json
+        kwh = GetKWh()
+        price_kwh = kwh.price
+        current_datetime = kwh.current_date
+        calculator = Calculate(session_id, [brand1, model1, brand2, model2, time, price_kwh, current_datetime])
+        return calculator.json
     else:
         return 'Forbidden'
 

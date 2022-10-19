@@ -49,8 +49,8 @@ class AdvancedCalculate():
 
     def end_point(self):
         if (self.price1 > self.price2 and self.cost1 > self.cost2) or (self.price1 < self.price2 and self.cost1 < self.price2):
-            self.endValue1 = abs(self.price1 + self.cost1 * (self.crossingYear + 5) * self.months) + self.price1
-            self.endValue2 = abs(self.price2 + self.cost2 * (self.crossingYear + 5) * self.months) + self.price2
+            self.endValue1 = abs(self.price1 + self.cost1 * (self.crossingYear + 5) * self.months)
+            self.endValue2 = abs(self.price2 + self.cost2 * (self.crossingYear + 5) * self.months)
             self.endPoint1 = (5, self.endValue1)
             self.endPoint2 = (5, self.endValue2)
         else:

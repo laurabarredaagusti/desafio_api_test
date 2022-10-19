@@ -97,13 +97,6 @@ def advanced():
             return query.result_obj
     else:
         return 'Forbidden'
-        
-
-@application.route('/mltest', methods=['GET'])
-def mltest():
-    with open('model/rfc_model', "rb") as archivo_entrada:
-        my_model = pickle.load(archivo_entrada)
-    return 'Loaded model'
 
 
 if __name__ == '__main__':

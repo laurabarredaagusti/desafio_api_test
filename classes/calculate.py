@@ -49,15 +49,7 @@ class Calculate:
         self.consumption1 = float(self.records[0][0])
         self.product_family = self.records[0][1]
         self.consumption2 = float(self.records[1][0])
-
-    # def get_consumption_family(self):
-    #     query = '''SELECT "Consumption", "Product_family" 
-    #     FROM products 
-    #     WHERE ("Brand" = 'f&u' AND "Model" = 'fls32227h') 
-    #     OR ("Brand" = 'gelhard' AND "Model" = 'gtv2282pbt');'''
-    #     self.cursor.execute(query)
-    #     self.records = self.cursor.fetchall()
-    #     print(self.records)
+        
 
     def get_type_consumption(self):
         self.consum_type_prodfamily_var = [self.product_family]

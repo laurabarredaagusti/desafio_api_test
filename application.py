@@ -1,5 +1,6 @@
+import pickle
 from flask import Flask
-from flask_cors import CORS
+# from flask_cors import CORS
 
 from classes.advanced_calculate import AdvancedCalculate
 from classes.category import Category
@@ -13,7 +14,7 @@ from functions import get_argument
 from variables import API_KEY
 
 application = Flask(__name__)
-CORS(application)
+# CORS(application)
 
 
 @application.route('/')
@@ -96,6 +97,13 @@ def advanced():
             return query.result_obj
     else:
         return 'Forbidden'
+        
+
+@application.route('/mltest', methods=['GET'])
+def mltest():
+    with open('model/rfc_model', "rb") as archivo_entrada:
+        my_model = pickle.load(archivo_entrada)
+    return 'Loaded model'
 
 
 if __name__ == '__main__':

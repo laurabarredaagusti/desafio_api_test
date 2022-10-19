@@ -64,6 +64,10 @@ class Calculate:
 
     def cal_kwh(self, consumption, time):
         n_days_month = 365 / 12 
+        print(consumption)
+        print(self.price_kwh)
+        print(time)
+        print(n_days_month)
         return consumption * self.price_kwh * time * n_days_month 
 
 

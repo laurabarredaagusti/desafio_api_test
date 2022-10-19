@@ -26,9 +26,9 @@ class CheckQr():
         self.brand1 = self.records[0][0]
         self.model1 = self.records[0][1]
         self.product_family1 = self.records[0][2]
-        self.brand2 = self.records[0][0]
-        self.model2 = self.records[0][1]
-        self.product_family2 = self.records[0][2]
+        self.brand2 = self.records[1][0]
+        self.model2 = self.records[1][1]
+        self.product_family2 = self.records[1][2]
 
     
     def filter_family(self):

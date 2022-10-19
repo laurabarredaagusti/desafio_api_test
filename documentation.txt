@@ -81,4 +81,8 @@ returns: {
           Total_years: 'total years axis x'
           End_value1: 'total money invested'
           End_value2: 'total money invested'
+          brand1: 'brand1',
+          brand2: 'brand2',
+          model1: 'model1',
+          model2: 'model2'
           }

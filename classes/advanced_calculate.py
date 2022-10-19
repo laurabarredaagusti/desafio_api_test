@@ -57,7 +57,11 @@ class AdvancedCalculate():
                            'crossingCost': self.crossingCost,
                            'Total_years': self.totalYear,
                            'EndValue1': self.endValue1,
-                           'EndValue2': self.endValue2}
+                           'EndValue2': self.endValue2,
+                           'brand1': 'brand1',
+                           'brand2': 'brand2',
+                           'model1': 'model1',
+                           'model2': 'model2'}
 
     def store_data(self):
         self.update_usersearch_advanced_var = [self.crossingYear, self.crossingCost, self.sessionId]

@@ -30,6 +30,7 @@ class Calculate:
         self.get_consumption_family()
         self.get_type_consumption()
         self.decide_calculator()
+        self.get_label()
         self.return_json()
         self.store_data()
 

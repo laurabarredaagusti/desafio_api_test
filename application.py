@@ -73,8 +73,9 @@ def calculate():
             return 'Same product'
 
         elif session_id == 'undefined':
-            query = SessionId()
-            session_id = query.session_id
+            return 'Undefined'
+            # query = SessionId()
+            # session_id = query.session_id
 
         else:   
             kwh = GetKWh()

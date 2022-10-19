@@ -32,7 +32,7 @@ class AdvancedCalculate():
         self.initPoint2 = (0, self.price2)
 
     def crossing_year(self):
-        if self.price1 == self.price2 and self.cost1 == self.cost2:
+        if self.cost1 == self.cost2:
             self.crossingYear = 0
         else:
             self.crossingYear = (self.price1 - self.price2) * (1 / (self.cost2 - self.cost1)) * (1 / self.months)

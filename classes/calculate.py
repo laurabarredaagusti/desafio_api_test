@@ -46,7 +46,7 @@ class Calculate:
 
 
     def get_consumption_family(self):
-        self.cons_prod_fam_products_var = [self.brand1, self.model1, self.brand2, self.model2]
+        self.cons_prod_fam_products_var = [self.brand1, self.model1.lower(), self.brand2, self.model2.lower()]
         self.records = exec_query_records(self.cons_prod_fam_products, self.cons_prod_fam_products_var, self.cursor)
         self.consumption1 = float(self.records[0][0])
         self.product_family = self.records[0][1]

@@ -1,5 +1,6 @@
 from functions import *
 from queries.queries import *
+import numpy as np
 
 class AdvancedCalculate():
 
@@ -70,6 +71,10 @@ class AdvancedCalculate():
         self.model2 = self.records[0][3].upper()
 
     def get_object(self):
+        self.difference = [self.endValue1, self.endValue2]
+        self.difference.sort()
+        self.difference = np.diff(self.difference)
+
         self.result_obj = {'CrossingYear': self.crossingYear,
                            'crossingCost': self.crossingCost,
                            'Total_years': round(self.totalYear, 1),
@@ -78,7 +83,8 @@ class AdvancedCalculate():
                            'brand1': self.brand1,
                            'brand2': self.brand2,
                            'model1': self.model1,
-                           'model2': self.model2}
+                           'model2': self.model2,
+                           'difference': self.difference[0]}
 
     def store_data(self):
         self.update_usersearch_advanced_var = [self.crossingYear, self.crossingCost, self.sessionId]

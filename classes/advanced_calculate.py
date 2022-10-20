@@ -43,7 +43,7 @@ class AdvancedCalculate():
 
     def end_year(self):
         if self.crossingYear > 0:
-            self.totalYear = self.crossingYear + 2
+            self.totalYear = self.crossingYear * 1.2
         else:
             self.totalYear = 5
 

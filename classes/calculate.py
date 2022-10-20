@@ -72,6 +72,7 @@ class Calculate:
 
 
     def decide_calculator(self):
+        print(self.consumption_type)
         if self.consumption_type == 'hour' or self.consumption_type == 'permanent' or self.consumption_type == 'hours_week':
             self.cost_1 = self.cal_kwh(self.consumption1, self.time)
             self.cost_2 = self.cal_kwh(self.consumption2, self.time)

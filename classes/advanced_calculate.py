@@ -80,14 +80,14 @@ class AdvancedCalculate():
             # SI SE CRUZAN EN MÁS DE 15 AÑOS
             if (abs(self.crossingYear))>15:
                 self.totalYear = 15
-                self.endValue1 = self.price1 + self.cost1 * (15) * self.months
-                self.endValue2 = self.price2 + self.cost2 * (15) * self.months
+                self.endValue1 = self.price1 + self.cost1 * self.totalYear * self.months
+                self.endValue2 = self.price2 + self.cost2 * self.totalYear * self.months
                 self.endPoint1 = (self.totalYear, self.endValue1)
                 self.endPoint2 = (self.totalYear, self.endValue2)
             else:   
-                self.totalYear =  self.crossingYear * 1.3
-                self.endValue1 = self.price1 + self.cost1 * (self.crossingYear * 1.3) * self.months
-                self.endValue2 = self.price2 + self.cost2 * (self.crossingYear * 1.3) * self.months
+                self.totalYear =  self.crossingYear + 5
+                self.endValue1 = self.price1 + self.cost1 * self.totalYear * self.months
+                self.endValue2 = self.price2 + self.cost2 * self.totalYear * self.months
                 self.endPoint1 = self.totalYear, self.endValue1
                 self.endPoint2 = (self.totalYear, self.endValue2)
 
@@ -96,8 +96,8 @@ class AdvancedCalculate():
             self.crossingCost = 0
             self.crossingPoint = (self.crossingYear, self.crossingCost) 
             self.totalYear = 5
-            self.endValue1 = self.price1 + self.cost1 * (5) * self.months
-            self.endValue2 = self.price2 + self.cost2 * (5) * self.months
+            self.endValue1 = self.price1 + self.cost1 * self.totalYear * self.months
+            self.endValue2 = self.price2 + self.cost2 * self.totalYear * self.months
             self.endPoint1 = (self.totalYear, self.endValue1)
             self.endPoint2 = (self.totalYear, self.endValue2) 
 

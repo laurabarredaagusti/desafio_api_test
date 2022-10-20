@@ -69,7 +69,7 @@ class AdvancedCalculate():
         cond1 = self.price1 != self.price2
         cond2 = self.cost1 != self.cost2
         cond3 = (self.price1 > self.price2 and self.cost1 < self.cost2)
-        cond4 = self.price1 < self.price2 and self.cost1 > self.cost2
+        cond4 = (self.price1 < self.price2 and self.cost1 > self.cost2)
         cond5 = (cond3 or cond4)
 
         if cond1 and cond2 and cond5:

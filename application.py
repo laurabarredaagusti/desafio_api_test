@@ -1,5 +1,5 @@
 from flask import Flask
-from flask_cors import CORS
+# from flask_cors import CORS
 
 from classes.advanced_calculate import AdvancedCalculate
 from classes.category import Category
@@ -13,7 +13,7 @@ from functions import get_argument
 from variables import API_KEY
 
 application = Flask(__name__)
-CORS(application)
+# CORS(application)
 
 
 @application.route('/')

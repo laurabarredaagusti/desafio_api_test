@@ -84,7 +84,7 @@ class AdvancedCalculate():
                            'brand2': self.brand2,
                            'model1': self.model1,
                            'model2': self.model2,
-                           'difference': self.difference[0]}
+                           'difference': round(self.difference[0],2)}
 
     def store_data(self):
         self.update_usersearch_advanced_var = [self.crossingYear, self.crossingCost, self.sessionId]

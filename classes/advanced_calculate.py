@@ -85,11 +85,14 @@ class AdvancedCalculate():
                 self.endPoint1 = (self.totalYear, self.endValue1)
                 self.endPoint2 = (self.totalYear, self.endValue2)
             else:   
-                self.totalYear =  self.crossingYear * 1.3
-                self.endValue1 = self.price1 + self.cost1 * (self.crossingYear * 1.3) * self.months
-                self.endValue2 = self.price2 + self.cost2 * (self.crossingYear * 1.3) * self.months
-                self.endPoint1 = self.totalYear, self.endValue1
-                self.endPoint2 = (self.totalYear, self.endValue2)
+                if self.crossingYear > 0:
+                    self.totalYear =  self.crossingYear * 1.3
+                    self.endValue1 = self.price1 + self.cost1 * (self.crossingYear * 1.3) * self.months
+                    self.endValue2 = self.price2 + self.cost2 * (self.crossingYear * 1.3) * self.months
+                    self.endPoint1 = self.totalYear, self.endValue1
+                    self.endPoint2 = (self.totalYear, self.endValue2)
+                else:
+                    self.totalYear = 5
 
         else:
             self.crossingPoint = (0,0) 

@@ -37,9 +37,6 @@ class AdvancedCalculate():
             self.crossingYear = (self.price1 - self.price2) * (1 / (self.cost2 - self.cost1)) * (1 / self.months)
             self.crossingCost = self.price2 + self.cost2 * self.crossingYear * self.months
             self.crossingPoint = (abs(self.crossingYear), self.crossingCost) 
-            print(self.crossingYear)
-            print(self.crossingCost)
-            print(self.crossingPoint)
             
             # SI SE CRUZAN EN MÁS DE 15 AÑOS
             if (abs(self.crossingYear))>15:
@@ -75,7 +72,7 @@ class AdvancedCalculate():
     def get_object(self):
         self.result_obj = {'CrossingYear': self.crossingYear,
                            'crossingCost': self.crossingCost,
-                           'Total_years': self.totalYear,
+                           'Total_years': round(self.totalYear, 1),
                            'EndValue1': self.endValue1,
                            'EndValue2': self.endValue2,
                            'brand1': self.brand1,

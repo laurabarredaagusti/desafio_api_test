@@ -1,4 +1,5 @@
 from flask import jsonify
+from application import category
 from functions import *
 from queries.queries import *
 
@@ -25,9 +26,10 @@ class Category:
 
     def get_brand_model(self):
         if self.product_category == 'range_hood':
-            self.product_category = 'range hoods'
+            self.product_category == 'range hood'
         elif self.product_category == 'water_heater':
-            self.product_category = 'water heaters'
+            self.product_category == 'water heater'
+            
         self.brand_model_productvar = [self.product_category]
         self.records = exec_query_records(self.brand_model_product, self.brand_model_productvar, self.cursor)
 
@@ -44,10 +46,6 @@ class Category:
             self.equiv_dict_new = dict(zip(self.brand_list, list(self.equiv_dict.values())))
 
     def get_type_consumption(self):
-        if self.product_category == 'range hoods':
-            self.product_category = 'range_hood'
-        elif self.product_category == 'water heaters':
-            self.product_category = 'water_heater'
         self.consum_type_prodfamilyvar = [self.product_category]
         self.records = exec_query_records(self.consum_type_prodfamily, self.consum_type_prodfamilyvar, self.cursor)
         self.consumption_type = self.records[0][0]

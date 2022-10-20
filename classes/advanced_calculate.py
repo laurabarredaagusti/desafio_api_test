@@ -66,13 +66,13 @@ class AdvancedCalculate():
         # self.end_year()
         # self.end_point()
 
-        cond1 = self.price1 != self.price2
-        cond2 = self.cost1 != self.cost2
-        cond3 = (self.price1 > self.price2 and self.cost1 < self.cost2)
-        cond4 = (self.price1 < self.price2 and self.cost1 > self.cost2)
-        cond5 = (cond3 or cond4)
+        # cond1 = self.price1 != self.price2
+        # cond2 = self.cost1 != self.cost2
+        # cond3 = (self.price1 > self.price2 and self.cost1 < self.cost2)
+        # cond4 = (self.price1 < self.price2 and self.cost1 > self.cost2)
+        # cond5 = ((self.price1 > self.price2 and self.cost1 < self.cost2) or (self.price1 < self.price2 and self.cost1 > self.cost2))
 
-        if cond1 and cond2 and cond5:
+        if (self.price1 != self.price2) and (self.cost1 != self.cost2) and ((self.price1 > self.price2 and self.cost1 < self.cost2) or (self.price1 < self.price2 and self.cost1 > self.cost2)):
             self.crossingYear = (self.price1 - self.price2) * (1 / (self.cost1 + self.cost2)) * (1 / self.months)
             self.crossingCost = self.price2 + self.cost2 * self.crossingYear * self.months
             self.crossingPoint = (abs(self.crossingYear), self.crossingCost) 

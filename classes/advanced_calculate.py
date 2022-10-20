@@ -92,7 +92,9 @@ class AdvancedCalculate():
                 self.endPoint2 = (self.totalYear, self.endValue2)
 
         else:
-            self.crossingPoint = (0,0) 
+            self.crossingYear = 0
+            self.crossingCost = 0
+            self.crossingPoint = (self.crossingYear, self.crossingCost) 
             self.totalYear = 5
             self.endValue1 = self.price1 + self.cost1 * (5) * self.months
             self.endValue2 = self.price2 + self.cost2 * (5) * self.months

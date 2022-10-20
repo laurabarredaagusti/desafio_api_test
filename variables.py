@@ -12,9 +12,9 @@ labelDict = {'A+++': 'https://eprel.ec.europa.eu/assets/images/label/thumbnails/
              'A++': 'https://eprel.ec.europa.eu/assets/images/label/thumbnails/A-Left-DarkGreen-WithAGScale.png',
              'A+': 'https://eprel.ec.europa.eu/assets/images/label/thumbnails/A-Left-DarkGreen-WithAGScale.png',
              'A': 'https://eprel.ec.europa.eu/assets/images/label/thumbnails/A-Left-DarkGreen-WithAGScale.png',
-             'B': 'https://eprel.ec.europa.eu/assets/images/label/thumbnails/A-Left-DarkGreen-WithAGScale.png',
-             'C': 'https://eprel.ec.europa.eu/assets/images/label/thumbnails/A-Left-DarkGreen-WithAGScale.png',
-             'D': 'https://eprel.ec.europa.eu/assets/images/label/thumbnails/A-Left-DarkGreen-WithAGScale.png',
-             'E': 'https://eprel.ec.europa.eu/assets/images/label/thumbnails/A-Left-DarkGreen-WithAGScale.png',
-             'F': 'https://eprel.ec.europa.eu/assets/images/label/thumbnails/A-Left-DarkGreen-WithAGScale.png',
-             'G': 'https://eprel.ec.europa.eu/assets/images/label/thumbnails/A-Left-DarkGreen-WithAGScale.png'}
+             'B': 'https://eprel.ec.europa.eu/assets/images/label/thumbnails/B-Left-MediumGreen-WithAGScale.png',
+             'C': 'https://eprel.ec.europa.eu/assets/images/label/thumbnails/C-Left-LightGreen-WithAGScale.png',
+             'D': 'https://eprel.ec.europa.eu/assets/images/label/thumbnails/D-Left-Yellow-WithAGScale.png',
+             'E': 'https://eprel.ec.europa.eu/assets/images/label/thumbnails/E-Left-LightOrange-WithAGScale.png',
+             'F': 'https://eprel.ec.europa.eu/assets/images/label/thumbnails/F-Left-DarkOrange-WithAGScale.png',
+             'G': 'https://eprel.ec.europa.eu/assets/images/label/thumbnails/G-Left-Red-WithAGScale.png'}

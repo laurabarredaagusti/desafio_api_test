@@ -58,7 +58,7 @@ class Calculate:
     def get_type_consumption(self):
         if self.product_family == 'range hoods':
             self.product_family = 'range_hood'
-        elif self.product_family == 'wather heaters':
+        elif self.product_family == 'water heaters':
             self.product_family = 'water_heater'
         self.consum_type_prodfamily_var = [self.product_family]
         self.records = exec_query_records(self.consum_type_prodfamily, self.consum_type_prodfamily_var, self.cursor)
